@@ -1,22 +1,25 @@
 import React from 'react';
 import { PlayerBag, LootType, LOOT_SPECS } from '@/lib/types';
+import { translations, Language } from '@/lib/translations';
 import { clsx } from 'clsx';
 
 interface BagProgressBarProps {
   playerIndex: number;
   bag: PlayerBag;
   simpleMode?: boolean;
+  language: Language;
 }
 
 const COLOR_MAP: Record<string, string> = {
   Gold: 'bg-yellow-400',
-  Coke: 'bg-stone-300', // Coke is whiteish, gray-100 might be too light on white bg
+  Coke: 'bg-stone-300',
   Weed: 'bg-green-500',
   Painting: 'bg-red-500',
   Cash: 'bg-green-800',
 };
 
-export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag, simpleMode = false }) => {
+export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag, simpleMode = false, language }) => {
+  const t = translations[language];
   // Sort items for visual consistency
   const sortedItems = [...bag.items].sort((a, b) => {
      const order = ['Gold', 'Coke', 'Weed', 'Painting', 'Cash'];
@@ -27,7 +30,7 @@ export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag
     <div className="space-y-1">
       {!simpleMode && (
         <div className="flex justify-between items-end mb-1">
-            <span className="font-hand text-lg text-stone-300">Player {playerIndex + 1}</span>
+            <span className="font-hand text-lg text-stone-300">{language === 'en' ? `Player ${playerIndex + 1}` : `玩家 ${playerIndex + 1}`}</span>
             <span className="font-mono text-sm text-yellow-500 font-bold">
             ${bag.totalValue.toLocaleString()} 
             <span className="text-stone-500 ml-2">({Math.min(100, Math.round(bag.totalWeight))}% Full)</span>
@@ -48,17 +51,17 @@ export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag
         {sortedItems.map((item, idx) => (
           <div 
             key={idx}
-            className={clsx(COLOR_MAP[item.type], "h-full relative group transition-all duration-500 cursor-help")}
+            className={clsx(COLOR_MAP[item.type] || 'bg-stone-500', "h-full relative group transition-all duration-500 cursor-help")}
             style={{ width: `${item.percentage}%` }}
           >
              {/* Tooltip */}
              <div className="absolute opacity-0 group-hover:opacity-100 bottom-full mb-1 left-1/2 -translate-x-1/2 bg-black/90 text-white text-xs p-1 rounded whitespace-nowrap z-20 pointer-events-none">
-                {item.type}: {Math.round(item.percentage)}% (${item.value.toLocaleString()})
-             </div>
+                {t.loot[item.type as keyof typeof t.loot] || item.type}: {Math.round(item.percentage)}% (${item.value.toLocaleString()})
+              </div>
              {/* Label if wide enough */}
              {item.percentage > 20 && !simpleMode && (
                 <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-black/70 overflow-hidden">
-                   {item.type}
+                   {t.loot[item.type as keyof typeof t.loot] || item.type}
                 </span>
              )}
           </div>
@@ -83,13 +86,13 @@ export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag
                         return Object.entries(groups).map(([type, totalWeight], i, arr) => {
                             return (
                                 <span key={type}>
-                                    {type} {Math.round(totalWeight)}%
+                                    {t.loot[type as keyof typeof t.loot] || type} {Math.round(totalWeight)}%
                                     {i < arr.length - 1 ? ', ' : ''}
                                 </span>
                             );
                         });
                     })()
-                ) : '無'}
+                ) : (language === 'en' ? 'None' : '無')}
             </div>
          </div>
       )}

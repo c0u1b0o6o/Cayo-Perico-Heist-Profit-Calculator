@@ -2,16 +2,19 @@ import React from 'react';
 import { Zone, LootType, LootCounts } from '@/lib/types';
 import { Plus, Minus, Lock } from 'lucide-react';
 import { clsx } from 'clsx';
+import { translations, Language } from '@/lib/translations';
 
 interface LootInputProps {
   zone: Zone;
   lootCounts: LootCounts;
   onChange: (zone: Zone, type: LootType, delta: number) => void;
   disabled?: boolean;
+  language: Language;
 }
 
 const ZONE_CONFIG: Record<Zone, LootType[]> = {
-  'Main Dock': ['Coke', 'Weed', 'Cash'],
+  '大倉': ['Coke', 'Weed', 'Cash'],
+  '小倉': ['Coke', 'Weed', 'Cash'],
   'North Storage': ['Gold', 'Cash', 'Painting'],
   'South Storage': ['Gold', 'Cash', 'Painting'],
   'West Storage': ['Gold', 'Cash', 'Painting'],
@@ -19,8 +22,9 @@ const ZONE_CONFIG: Record<Zone, LootType[]> = {
   'Office': ['Painting'],
 };
 
-export const LootInput: React.FC<LootInputProps> = ({ zone, lootCounts, onChange, disabled }) => {
+export const LootInput: React.FC<LootInputProps> = ({ zone, lootCounts, onChange, disabled, language }) => {
   const allowedLoot = ZONE_CONFIG[zone] || [];
+  const t = translations[language];
 
   return (
     <div className={clsx(
@@ -36,7 +40,9 @@ export const LootInput: React.FC<LootInputProps> = ({ zone, lootCounts, onChange
       {/* Tape */}
       <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-yellow-100/20 rotate-1 tape" />
       
-      <h3 className="font-hand text-xl mb-4 text-yellow-500 tracking-wider text-center">{zone}</h3>
+      <h3 className="font-hand text-xl mb-4 text-yellow-500 tracking-wider text-center">
+        {t.zones[zone] || zone}
+      </h3>
       
       <div className="space-y-3">
         {allowedLoot.map((type) => {
@@ -44,7 +50,7 @@ export const LootInput: React.FC<LootInputProps> = ({ zone, lootCounts, onChange
           
           return (
             <div key={type} className="flex items-center justify-between group">
-              <span className="text-stone-300 font-hand text-lg">{type}</span>
+              <span className="text-stone-300 font-hand text-lg">{t.loot[type] || type}</span>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={() => onChange(zone, type, -1)}

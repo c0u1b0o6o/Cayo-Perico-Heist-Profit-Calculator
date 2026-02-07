@@ -4,22 +4,28 @@ import React, { useState, useMemo } from 'react';
 import { LootCounts, PlayerSettings, Zone, LootType } from '@/lib/types';
 import { calculateOptimalLoot } from '@/lib/algorithm';
 import { LootInput } from '@/components/LootInput';
+import { LootSummary } from '@/components/LootSummary';
 import { ResultBoard } from '@/components/ResultBoard';
+import { LanguageToggle } from '@/components/LanguageToggle';
+import { translations, Language } from '@/lib/translations';
 import { Check, Dices } from 'lucide-react';
 import { clsx } from 'clsx';
 
-const ZONES: Zone[] = ['Main Dock', 'North Storage', 'South Storage', 'West Storage', 'Basement', 'Office'];
+const ZONES: Zone[] = ['大倉', '小倉', 'North Storage', 'South Storage', 'West Storage', 'Basement', 'Office'];
 
-const PRIMARY_TARGETS = [
-  { name: 'Sinsimito Tequila', value: 900000, id: 'tequila' },
-  { name: 'Ruby Necklace', value: 1000000, id: 'necklace' },
-  { name: 'Bearer Bonds', value: 1100000, id: 'bonds' },
-  { name: 'Pink Diamond', value: 1300000, id: 'diamond' },
-  { name: 'Panther Statue', value: 1900000, id: 'panther' },
-  { name: 'Madrazo Files', value: 1100000, id: 'files' },
+const PRIMARY_TARGETS: { nameKey: keyof typeof translations.en.loot; value: number; id: string }[] = [
+  { nameKey: 'Sinsimito Tequila', value: 900000, id: 'tequila' },
+  { nameKey: 'Ruby Necklace', value: 1000000, id: 'necklace' },
+  { nameKey: 'Bearer Bonds', value: 1100000, id: 'bonds' },
+  { nameKey: 'Pink Diamond', value: 1300000, id: 'diamond' },
+  { nameKey: 'Panther Statue', value: 1900000, id: 'panther' },
+  { nameKey: 'Madrazo Files', value: 1100000, id: 'files' },
 ];
 
 export default function Home() {
+  const [currentLang, setCurrentLang] = useState<Language>('tw');
+  const t = translations[currentLang];
+
   const [settings, setSettings] = useState<PlayerSettings>({
     players: 1,
     hardMode: false,
@@ -33,11 +39,10 @@ export default function Home() {
   const [wallSafeValue, setWallSafeValue] = useState(0);
 
   const handlePlayerChange = (num: number) => {
-    // Default cuts logic: Captain gets the most, others get 15% min
     let newCuts = [100];
     if (num === 2) newCuts = [85, 15];
     else if (num === 3) newCuts = [70, 15, 15];
-    else if (num ===4) newCuts = [55, 15, 15, 15];
+    else if (num === 4) newCuts = [55, 15, 15, 15];
     
     setSettings(s => ({ ...s, players: num, cuts: newCuts }));
   };
@@ -47,13 +52,7 @@ export default function Home() {
       const newCuts = [...s.cuts];
       const newVal = Math.max(0, Math.min(100, newCuts[playerIndex] + delta));
       
-      // If we change one, we must balance it with the Leader (index 0) 
-      // OR just allow free editing as long as sum <= 100? 
-      // GTA logic: You adjust individual cuts, and it must sum to 100.
-      // Easiest UI: Changing a non-leader cut subtracts from the leader.
       if (playerIndex === 0) {
-        // Leader manual adjustment (just shifts the remainder if we want to be fancy, 
-        // but let's just let it be for now and show a warning if sum != 100)
         newCuts[0] = newVal;
       } else {
         const diff = newVal - newCuts[playerIndex];
@@ -67,7 +66,7 @@ export default function Home() {
   };
 
   const handleReset = () => {
-    if (confirm('確定要清除所有偵察資料嗎？')) {
+    if (confirm(currentLang === 'en' ? 'Reset all scouted data?' : '確定要清除所有偵察資料嗎？')) {
       setLootCounts({});
       setWallSafeValue(0);
     }
@@ -97,16 +96,18 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-8">
+      <LanguageToggle currentLang={currentLang} onLanguageChange={setCurrentLang} />
+
       {/* Header */}
       <header className="text-center mb-8 relative z-10 flex flex-col items-center">
         <h1 className="font-hand text-4xl sm:text-6xl text-white transform -rotate-1 drop-shadow-lg inline-block border-b-2 border-white pb-2 bg-board-bg/50 backdrop-blur-sm px-4 rounded mb-2">
-          佩里克島搶劫計畫
+          {t.title}
         </h1>
         <button 
           onClick={handleReset}
           className="font-hand text-stone-400 hover:text-red-400 text-sm underline transition-colors"
         >
-          重置所有偵察資料
+          {currentLang === 'en' ? 'Reset All Data' : '重置所有偵察資料'}
         </button>
       </header>
 
@@ -119,12 +120,12 @@ export default function Home() {
           {/* Settings Note */}
           <div className="bg-yellow-100 text-gray-800 p-6 rounded shadow-lg transform rotate-1 relative paper-texture transition-transform hover:scale-[1.02]">
             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-48 h-8 bg-yellow-200 opacity-50 rotate-1 tape"></div>
-            <h2 className="font-hand text-2xl mb-4 border-b-2 border-gray-400 pb-1 font-bold">任務設定</h2>
+            <h2 className="font-hand text-2xl mb-4 border-b-2 border-gray-400 pb-1 font-bold">{t.settings.title}</h2>
 
             <div className="space-y-4">
               {/* Players */}
               <div>
-                <label className="block font-bold mb-1 font-hand text-lg">搶劫成員</label>
+                <label className="block font-bold mb-1 font-hand text-lg">{t.settings.players}</label>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4].map(num => (
                     <button
@@ -138,7 +139,7 @@ export default function Home() {
                           : "border-gray-800 hover:bg-gray-200"
                       )}
                     >
-                      {num}人
+                      {num}{currentLang === 'en' ? 'P' : '人'}
                     </button>
                   ))}
                 </div>
@@ -156,7 +157,7 @@ export default function Home() {
                   >
                      {settings.hardMode && <Check size={16} className="text-white" />}
                   </div>
-                  <span className="font-hand text-lg font-bold text-red-700">困難模式</span>
+                  <span className="font-hand text-lg font-bold text-red-700">{currentLang === 'en' ? 'HARD MODE' : '困難模式'}</span>
                 </label>
 
                 <label className="cursor-pointer flex items-center space-x-2 select-none">
@@ -169,7 +170,7 @@ export default function Home() {
                   >
                      {settings.eliteCommand && <Check size={16} className="text-white" />}
                   </div>
-                  <span className="font-hand text-lg font-bold text-green-700">精英挑戰</span>
+                  <span className="font-hand text-lg font-bold text-green-700">{t.settings.elite}</span>
                 </label>
               </div>
             </div>
@@ -178,20 +179,20 @@ export default function Home() {
           {/* Primary Target Note */}
           <div className="bg-white text-gray-800 p-6 rounded shadow-lg transform -rotate-1 relative paper-texture transition-transform hover:scale-[1.02]">
             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-red-200 opacity-50 -rotate-2 tape"></div>
-            <h2 className="font-hand text-2xl mb-4 text-red-600 border-b-2 border-red-200 pb-1 font-bold">主要目標</h2>
+            <h2 className="font-hand text-2xl mb-4 text-red-600 border-b-2 border-red-200 pb-1 font-bold">{t.settings.target}</h2>
             <div className="space-y-4">
                 <select 
                 className="w-full p-2 border-2 border-gray-400 bg-transparent font-hand text-xl focus:border-gray-800 outline-none cursor-pointer"
                 value={selectedPrimaryValue}
                 onChange={(e) => setSelectedPrimaryValue(Number(e.target.value))}
                 >
-                {PRIMARY_TARGETS.map(t => (
-                    <option key={t.id} value={t.value}>{t.name}</option>
+                {PRIMARY_TARGETS.map(t_item => (
+                    <option key={t_item.id} value={t_item.value}>{t.loot[t_item.nameKey] || t_item.nameKey}</option>
                 ))}
                 </select>
 
                 <div>
-                    <label className="block font-bold mb-1 font-hand text-lg text-gray-600">辦公室保險箱</label>
+                    <label className="block font-bold mb-1 font-hand text-lg text-gray-600">{t.settings.wallSafe}</label>
                     <div className="flex items-center gap-2">
                         <span className="font-hand text-xl text-gray-400">$</span>
                         <input 
@@ -204,12 +205,12 @@ export default function Home() {
                         <button 
                             onClick={() => setWallSafeValue(Math.floor(Math.random() * (90000 - 50000 + 1)) + 50000)}
                             className="p-1.5 bg-gray-100 rounded border border-gray-300 hover:bg-gray-200 transition-colors text-gray-600"
-                            title="隨機生成金額 (50k~90k)"
+                            title={currentLang === 'en' ? 'Randomize (50k~90k)' : '隨機生成金額 (50k~90k)'}
                         >
                             <Dices size={18} />
                         </button>
                     </div>
-                    <p className="text-[10px] text-gray-400 mt-1 italic font-sans font-bold uppercase">Does not take bag space</p>
+                    <p className="text-[10px] text-gray-400 mt-1 italic font-sans font-bold uppercase">{t.settings.wallSafe.includes('Wall Safe') ? "Does not take bag space" : "不佔用背包空間"}</p>
                 </div>
             </div>
           </div>
@@ -217,11 +218,11 @@ export default function Home() {
            {/* Cuts Setting */}
            <div className="bg-blue-100 text-gray-800 p-6 rounded shadow-lg transform rotate-2 relative paper-texture transition-transform hover:scale-[1.02]">
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-blue-200 opacity-50 rotate-1 tape"></div>
-                <h2 className="font-hand text-2xl mb-4 text-blue-800 border-b-2 border-blue-400 pb-1 font-bold">分紅設定</h2>
+                <h2 className="font-hand text-2xl mb-4 text-blue-800 border-b-2 border-blue-400 pb-1 font-bold">{t.settings.cuts}</h2>
                 <div className="space-y-3 font-hand">
                     {settings.cuts.map((cut, idx) => (
                         <div key={idx} className="flex items-center justify-between">
-                            <span className="text-lg">{idx === 0 ? '隊長' : `成員 ${idx + 1}`}</span>
+                            <span className="text-lg">{idx === 0 ? t.results.leader : `${t.results.member} ${idx + 1}`}</span>
                             <div className="flex items-center gap-2">
                                 <button 
                                     onClick={() => handleCutChange(idx, -5)}
@@ -238,24 +239,26 @@ export default function Home() {
                         </div>
                     ))}
                     {cutsSum !== 100 && (
-                        <p className="text-red-500 text-xs mt-2 italic font-sans">總計必須為 100% (目前: {cutsSum}%)</p>
+                        <p className="text-red-500 text-xs mt-2 italic font-sans">{t.settings.cutsNote} (Total: {cutsSum}%)</p>
                     )}
                 </div>
             </div>
 
+            {/* Total Loot Summary Block */}
+            <LootSummary lootCounts={lootCounts} language={currentLang} />
         </div>
 
         {/* Middle Column: Loot Intel (The Map/Grid) */}
         <div className="lg:col-span-2">
             <div className="bg-gray-800/80 p-6 rounded-lg border-4 border-gray-600 relative backdrop-blur-sm shadow-2xl">
-                <h2 className="font-hand text-3xl mb-6 text-center text-white border-b-2 border-gray-600 pb-2 inline-block w-full">偵察情報</h2>
+                <h2 className="font-hand text-3xl mb-6 text-center text-white border-b-2 border-gray-600 pb-2 inline-block w-full">{t.intel.title}</h2>
 
                 {/* Loot Input Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {ZONES.map(zone => {
                         const isRestricted = settings.players === 1 && 
                             ['North Storage', 'South Storage', 'West Storage', 'Basement'].includes(zone) &&
-                            zone !== 'Office' && zone !== 'Main Dock';
+                            zone !== 'Office' && zone !== '大倉' && zone !== '小倉';
 
                         return (
                             <LootInput 
@@ -264,6 +267,7 @@ export default function Home() {
                                 lootCounts={lootCounts} 
                                 onChange={handleLootChange}
                                 disabled={isRestricted}
+                                language={currentLang}
                             />
                         );
                     })}
@@ -280,6 +284,7 @@ export default function Home() {
             settings={settings} 
             basePrimaryValue={selectedPrimaryValue} 
             wallSafeValue={wallSafeValue}
+            language={currentLang}
         />
       </div>
 
