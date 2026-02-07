@@ -16,9 +16,9 @@ export interface LootItem {
 }
 
 export const LOOT_SPECS: Record<LootType, LootItem> = {
-  Gold: { type: "Gold", value: 330000, weight: 66.67 },
+  Gold: { type: "Gold", value: 330000, weight: 66.6 },
   Coke: { type: "Coke", value: 223000, weight: 50 },
-  Weed: { type: "Weed", value: 148000, weight: 37.5 },
+  Weed: { type: "Weed", value: 148000, weight: 33.3 },
   Painting: { type: "Painting", value: 185000, weight: 50 },
   Cash: { type: "Cash", value: 90000, weight: 25 }, // Average of ~88k-92k
 };
