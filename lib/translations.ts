@@ -13,6 +13,12 @@ export interface Translation {
     targetValue: string;
     wallSafe: string;
   };
+  nav: {
+    prep: string;
+    results: string;
+    data: string;
+    contact: string;
+  };
   zones: {
     MainDockL: string;
     MainDockS: string;
@@ -78,6 +84,12 @@ export const translations: Record<Language, Translation> = {
       targetValue: "Target Value",
       wallSafe: "Office Wall Safe",
     },
+    nav: {
+      prep: "Prep Data",
+      results: "Final Results",
+      data: "Basic Data",
+      contact: "Contact Us",
+    },
     zones: {
       MainDockL: "Main Dock (L)",
       MainDockS: "Main Dock (S)",
@@ -141,6 +153,12 @@ export const translations: Record<Language, Translation> = {
       targetValue: "目標價值",
       wallSafe: "辦公室小保險箱",
     },
+    nav: {
+      prep: "前置",
+      results: "最終分紅",
+      data: "基礎數據",
+      contact: "聯絡我們",
+    },
     zones: {
       MainDockL: "大倉",
       MainDockS: "小倉",
@@ -170,7 +188,7 @@ export const translations: Record<Language, Translation> = {
     summary: {
       title: "偵察財物統計",
       empty: "尚無偵察資料",
-      footer: "Total secondary loot scanned",
+      footer: "偵察次要財物總額",
     },
     results: {
       title: "最終分紅計算",
@@ -204,6 +222,12 @@ export const translations: Record<Language, Translation> = {
       targetValue: "目标价值",
       wallSafe: "办公室小保险箱",
     },
+    nav: {
+      prep: "前置",
+      results: "最终分红",
+      data: "基础数据",
+      contact: "联系我们",
+    },
     zones: {
       MainDockL: "大仓",
       MainDockS: "小仓",
@@ -233,7 +257,7 @@ export const translations: Record<Language, Translation> = {
     summary: {
       title: "侦察财物统计",
       empty: "尚无侦察资料",
-      footer: "Total secondary loot scanned",
+      footer: "侦察次要财物总额",
     },
     results: {
       title: "最终分红计算",

@@ -7,6 +7,7 @@ import { LootInput } from '@/components/LootInput';
 import { LootSummary } from '@/components/LootSummary';
 import { ResultBoard } from '@/components/ResultBoard';
 import { LanguageToggle } from '@/components/LanguageToggle';
+import { NavBar } from '@/components/NavBar';
 import { translations, Language } from '@/lib/translations';
 import { Check, Dices } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -34,6 +35,11 @@ export default function Home() {
   });
   
   const [selectedPrimaryValue, setSelectedPrimaryValue] = useState(PRIMARY_TARGETS[0].value);
+  const [activeTab, setActiveTab] = useState('prep');
+  
+  // Gesture State
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const [lootCounts, setLootCounts] = useState<LootCounts>({});
   const [wallSafeValue, setWallSafeValue] = useState(0);
@@ -88,29 +94,72 @@ export default function Home() {
     });
   };
 
-  const calculatedBags = useMemo(() => {
-    return calculateOptimalLoot(lootCounts, settings.players);
-  }, [lootCounts, settings.players]);
-
+  const calculatedBags = useMemo(() => calculateOptimalLoot(lootCounts, settings.players), [lootCounts, settings.players]);
   const cutsSum = settings.cuts.reduce((a, b) => a + b, 0);
 
+  const tabs = ['prep', 'results', 'data', 'contact'];
+  const handleTabNavigation = (direction: 'prev' | 'next') => {
+    const currentIndex = tabs.indexOf(activeTab);
+    if (direction === 'prev' && currentIndex > 0) {
+      setActiveTab(tabs[currentIndex - 1]);
+    } else if (direction === 'next' && currentIndex < tabs.length - 1) {
+      setActiveTab(tabs[currentIndex + 1]);
+    }
+  };
+
+  // Improved Gesture Detection (Mouse & Touch)
+  const minSwipeDistance = 50;
+
+  const handleDragStart = (clientX: number) => {
+    setDragStart(clientX);
+    setIsDragging(true);
+  };
+
+  const handleDragEnd = (clientX: number) => {
+    if (!dragStart || !isDragging) return;
+    
+    const distance = dragStart - clientX;
+    if (Math.abs(distance) > minSwipeDistance) {
+      handleTabNavigation(distance > 0 ? 'next' : 'prev');
+    }
+    
+    setDragStart(null);
+    setIsDragging(false);
+  };
+
   return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-8">
-      <LanguageToggle currentLang={currentLang} onLanguageChange={setCurrentLang} />
+    <div className="min-h-screen bg-board-bg">
+      <NavBar 
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        language={currentLang}
+        onLanguageChange={setCurrentLang}
+      />
 
-      {/* Header */}
-      <header className="text-center mb-8 relative z-10 flex flex-col items-center">
-        <h1 className="font-hand text-4xl sm:text-6xl text-white transform -rotate-1 drop-shadow-lg inline-block border-b-2 border-white pb-2 bg-board-bg/50 backdrop-blur-sm px-4 rounded mb-2">
-          {t.title}
-        </h1>
-        <button 
-          onClick={handleReset}
-          className="font-hand text-stone-400 hover:text-red-400 text-sm underline transition-colors"
-        >
-          {currentLang === 'en' ? 'Reset All Data' : '重置所有偵察資料'}
-        </button>
-      </header>
+      {/* Left Navigation Zone */}
+      <button
+        onClick={() => handleTabNavigation('prev')}
+        className="nav-zone nav-zone-left"
+        aria-label="Previous tab"
+      />
 
+      {/* Right Navigation Zone */}
+      <button
+        onClick={() => handleTabNavigation('next')}
+        className="nav-zone nav-zone-right"
+        aria-label="Next tab"
+      />
+
+      <div 
+        className="max-w-7xl mx-auto px-4 sm:px-8 pb-4 sm:pb-8 pt-36 transition-opacity duration-300 select-none"
+        onMouseDown={(e) => handleDragStart(e.clientX)}
+        onMouseUp={(e) => handleDragEnd(e.clientX)}
+        onTouchStart={(e) => handleDragStart(e.targetTouches[0].clientX)}
+        onTouchEnd={(e) => handleDragEnd(e.changedTouches[0].clientX)}
+      >
+        {/* Prep Data Tab */}
+        {activeTab === 'prep' && (
+          <>
       {/* Main Planning Board */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
@@ -276,21 +325,45 @@ export default function Home() {
         </div>
 
       </div>
+          </>
+        )}
 
-      {/* Bottom Section: Results */}
-      <div className="mt-8 flex justify-center">
-        <ResultBoard 
-            bags={calculatedBags} 
-            settings={settings} 
-            basePrimaryValue={selectedPrimaryValue} 
-            wallSafeValue={wallSafeValue}
-            language={currentLang}
-        />
-      </div>
+        {/* Results Tab */}
+        {activeTab === 'results' && (
+          <div className="flex justify-center flex-col items-center">
+            <ResultBoard 
+                bags={calculatedBags} 
+                settings={settings} 
+                basePrimaryValue={selectedPrimaryValue} 
+                wallSafeValue={wallSafeValue}
+                language={currentLang}
+            />
+          </div>
+        )}
+
+        {/* Data Tab - Placeholder */}
+        {activeTab === 'data' && (
+          <div className="min-h-[60vh] flex flex-col items-center justify-center text-white/50 font-hand">
+            <h2 className="text-3xl mb-4 italic opacity-30 tracking-widest">{t.nav.data}</h2>
+            <p className="opacity-20">Coming Soon...</p>
+          </div>
+        )}
+
+        {/* Contact Tab - Placeholder */}
+        {activeTab === 'contact' && (
+          <div className="min-h-[60vh] flex flex-col items-center justify-center text-white/50 font-hand">
+            <h2 className="text-3xl mb-4 italic opacity-30 tracking-widest">{t.nav.contact}</h2>
+            <p className="opacity-20 text-center">
+              Built with Antigravity AI<br/>
+              GTA 5 Cayo Perico Calculator
+            </p>
+          </div>
+        )}
 
        <footer className="text-center mt-12 text-gray-500 text-sm font-hand">
             <p>Cayo Perico Heist Calculator &copy; 2026</p>
         </footer>
+      </div>
     </div>
   );
 }
