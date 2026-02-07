@@ -6,6 +6,7 @@ import { calculateOptimalLoot } from '@/lib/algorithm';
 import { LootInput } from '@/components/LootInput';
 import { LootSummary } from '@/components/LootSummary';
 import { ResultBoard } from '@/components/ResultBoard';
+import { ManualResultBoard } from '@/components/ManualResultBoard';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { NavBar } from '@/components/NavBar';
 import { translations, Language } from '@/lib/translations';
@@ -330,13 +331,22 @@ export default function Home() {
 
         {/* Results Tab */}
         {activeTab === 'results' && (
-          <div className="flex justify-center flex-col items-center">
+          <div className="flex justify-center flex-col items-center space-y-12">
             <ResultBoard 
                 bags={calculatedBags} 
                 settings={settings} 
                 basePrimaryValue={selectedPrimaryValue} 
                 wallSafeValue={wallSafeValue}
                 language={currentLang}
+            />
+            
+            <ManualResultBoard 
+                bags={calculatedBags} 
+                settings={settings} 
+                basePrimaryValue={selectedPrimaryValue} 
+                wallSafeValue={wallSafeValue}
+                language={currentLang}
+                lootCounts={lootCounts}
             />
           </div>
         )}

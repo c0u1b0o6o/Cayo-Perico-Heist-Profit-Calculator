@@ -63,6 +63,9 @@ export interface Translation {
     leader: string;
     member: string;
     recommendation: string;
+    manualTitle: string;
+    availablePool: string;
+    capacityWarning: string;
     emptyBags: string;
     copyBtn: string;
     copySuccess: string;
@@ -133,7 +136,10 @@ export const translations: Record<Language, Translation> = {
       cutsHeader: "Estimated Cuts:",
       leader: "Leader",
       member: "Member",
-      recommendation: "Bag Recommendations",
+      recommendation: "System Recommended (Optimal)",
+      manualTitle: "Manual Adjustment Calculator",
+      availablePool: "Available Loot Pool",
+      capacityWarning: "Bag Overweight!",
       emptyBags: "No data...",
       copyBtn: "Copy Image",
       copySuccess: "Copied to clipboard",
@@ -202,7 +208,10 @@ export const translations: Record<Language, Translation> = {
       cutsHeader: "成員預估分紅:",
       leader: "隊長",
       member: "成員",
-      recommendation: "建議拿取清單",
+      recommendation: "系統建議（最佳化）",
+      manualTitle: "手動分紅調節器",
+      availablePool: "剩餘財物池",
+      capacityWarning: "負重超出上限！",
       emptyBags: "尚無資料...",
       copyBtn: "複製圖片",
       copySuccess: "已複製",
@@ -271,7 +280,10 @@ export const translations: Record<Language, Translation> = {
       cutsHeader: "成员预估分红:",
       leader: "队长",
       member: "成员",
-      recommendation: "建议拿取清单",
+      recommendation: "系统建议（最优化）",
+      manualTitle: "手动分红调节器",
+      availablePool: "剩余财物池",
+      capacityWarning: "负重超出上限！",
       emptyBags: "尚无资料...",
       copyBtn: "复制图片",
       copySuccess: "已复制",
