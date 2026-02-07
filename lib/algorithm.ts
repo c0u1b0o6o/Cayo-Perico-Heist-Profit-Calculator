@@ -2,7 +2,7 @@ import { LOOT_SPECS, LootCounts, PlayerBag, BagItem, LootType, Zone } from './ty
 
 // Zones accessible only by 2+ players (Dual Keycards)
 // Note: '大倉' and '小倉' are accessible solo and thus NOT in this list.
-const RESTRICTED_ZONES: Zone[] = ['North Storage', 'South Storage', 'West Storage', 'Basement'];
+const RESTRICTED_ZONES: Zone[] = ['NorthStorage', 'SouthStorage', 'WestStorage', 'Basement'];
 // Note: Basement also contains Primary Target, but here we refer to Secondary Loot piles in Basement Storage. 
 // However, the input UI separates them. We need to be careful. 
 // Usually 'Basement' input refers to the storage locker. Primary is separate.

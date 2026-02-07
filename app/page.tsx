@@ -11,7 +11,7 @@ import { translations, Language } from '@/lib/translations';
 import { Check, Dices } from 'lucide-react';
 import { clsx } from 'clsx';
 
-const ZONES: Zone[] = ['大倉', '小倉', 'North Storage', 'South Storage', 'West Storage', 'Basement', 'Office'];
+const ZONES: Zone[] = ['MainDockL', 'MainDockS', 'NorthStorage', 'SouthStorage', 'WestStorage', 'Basement', 'Office'];
 
 const PRIMARY_TARGETS: { nameKey: keyof typeof translations.en.loot; value: number; id: string }[] = [
   { nameKey: 'Sinsimito Tequila', value: 900000, id: 'tequila' },
@@ -257,8 +257,8 @@ export default function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {ZONES.map(zone => {
                         const isRestricted = settings.players === 1 && 
-                            ['North Storage', 'South Storage', 'West Storage', 'Basement'].includes(zone) &&
-                            zone !== 'Office' && zone !== '大倉' && zone !== '小倉';
+                            ['NorthStorage', 'SouthStorage', 'WestStorage', 'Basement'].includes(zone) &&
+                            zone !== 'Office' && zone !== 'MainDockL' && zone !== 'MainDockS';
 
                         return (
                             <LootInput 

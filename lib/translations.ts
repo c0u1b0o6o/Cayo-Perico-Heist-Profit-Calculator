@@ -14,13 +14,13 @@ export interface Translation {
     wallSafe: string;
   };
   zones: {
-    '大倉': string;
-    '小倉': string;
-    'North Storage': string;
-    'South Storage': string;
-    'West Storage': string;
-    'Basement': string;
-    'Office': string;
+    MainDockL: string;
+    MainDockS: string;
+    NorthStorage: string;
+    SouthStorage: string;
+    WestStorage: string;
+    Basement: string;
+    Office: string;
   };
   loot: {
     Gold: string;
@@ -79,13 +79,13 @@ export const translations: Record<Language, Translation> = {
       wallSafe: "Office Wall Safe",
     },
     zones: {
-      '大倉': "Main Dock (L)",
-      '小倉': "Main Dock (S)",
-      'North Storage': "North Storage",
-      'South Storage': "South Storage",
-      'West Storage': "West Storage",
-      'Basement': "Basement",
-      'Office': "Office",
+      MainDockL: "Main Dock (L)",
+      MainDockS: "Main Dock (S)",
+      NorthStorage: "North Storage",
+      SouthStorage: "South Storage",
+      WestStorage: "West Storage",
+      Basement: "Basement",
+      Office: "Office",
     },
     loot: {
       Gold: "Gold",
@@ -142,13 +142,13 @@ export const translations: Record<Language, Translation> = {
       wallSafe: "辦公室小保險箱",
     },
     zones: {
-      '大倉': "大倉",
-      '小倉': "小倉",
-      'North Storage': "北倉",
-      'South Storage': "南倉",
-      'West Storage': "西倉",
-      'Basement': "地下室",
-      'Office': "辦公室",
+      MainDockL: "大倉",
+      MainDockS: "小倉",
+      NorthStorage: "北倉",
+      SouthStorage: "南倉",
+      WestStorage: "西倉",
+      Basement: "地下室",
+      Office: "辦公室",
     },
     loot: {
       Gold: "黃金",
@@ -205,13 +205,13 @@ export const translations: Record<Language, Translation> = {
       wallSafe: "办公室小保险箱",
     },
     zones: {
-      '大倉': "大仓",
-      '小倉': "小仓",
-      'North Storage': "北仓",
-      'South Storage': "南仓",
-      'West Storage': "西仓",
-      'Basement': "地下室",
-      'Office': "办公室",
+      MainDockL: "大仓",
+      MainDockS: "小仓",
+      NorthStorage: "北仓",
+      SouthStorage: "南仓",
+      WestStorage: "西仓",
+      Basement: "地下室",
+      Office: "办公室",
     },
     loot: {
       Gold: "黄金",

@@ -13,13 +13,13 @@ interface LootInputProps {
 }
 
 const ZONE_CONFIG: Record<Zone, LootType[]> = {
-  '大倉': ['Coke', 'Weed', 'Cash'],
-  '小倉': ['Coke', 'Weed', 'Cash'],
-  'North Storage': ['Gold', 'Cash', 'Painting'],
-  'South Storage': ['Gold', 'Cash', 'Painting'],
-  'West Storage': ['Gold', 'Cash', 'Painting'],
-  'Basement': ['Gold', 'Cash', 'Painting'],
-  'Office': ['Painting'],
+  MainDockL: ['Coke', 'Weed', 'Cash'],
+  MainDockS: ['Coke', 'Weed', 'Cash'],
+  NorthStorage: ['Gold', 'Cash', 'Painting'],
+  SouthStorage: ['Gold', 'Cash', 'Painting'],
+  WestStorage: ['Gold', 'Cash', 'Painting'],
+  Basement: ['Gold', 'Cash', 'Painting'],
+  Office: ['Painting'],
 };
 
 export const LootInput: React.FC<LootInputProps> = ({ zone, lootCounts, onChange, disabled, language }) => {

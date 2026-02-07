@@ -1,11 +1,11 @@
 export type LootType = "Gold" | "Coke" | "Weed" | "Painting" | "Cash";
 
 export type Zone =
-  | "大倉"
-  | "小倉"
-  | "North Storage"
-  | "South Storage"
-  | "West Storage"
+  | "MainDockL"
+  | "MainDockS"
+  | "NorthStorage"
+  | "SouthStorage"
+  | "WestStorage"
   | "Basement"
   | "Office";
 
