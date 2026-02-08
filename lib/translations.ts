@@ -70,6 +70,9 @@ export interface Translation {
     copyBtn: string;
     copySuccess: string;
     downloadBtn: string;
+    manualFinancialBreakdown: string;
+    finalManualTake: string;
+    payouts: string;
   };
 }
 
@@ -144,6 +147,9 @@ export const translations: Record<Language, Translation> = {
       copyBtn: "Copy Image",
       copySuccess: "Copied to clipboard",
       downloadBtn: "Download Image",
+      manualFinancialBreakdown: "Manual Financial Breakdown",
+      finalManualTake: "Final Manual Take",
+      payouts: "Player Payouts",
     }
   },
   tw: {
@@ -216,6 +222,9 @@ export const translations: Record<Language, Translation> = {
       copyBtn: "複製圖片",
       copySuccess: "已複製",
       downloadBtn: "下載圖片",
+      manualFinancialBreakdown: "手動分紅結算",
+      finalManualTake: "最終手動利潤",
+      payouts: "成員分成",
     }
   },
   cn: {
@@ -288,6 +297,9 @@ export const translations: Record<Language, Translation> = {
       copyBtn: "复制图片",
       copySuccess: "已复制",
       downloadBtn: "下载图片",
+      manualFinancialBreakdown: "手动分红结算",
+      finalManualTake: "最终手动利润",
+      payouts: "成员分成",
     }
   }
 };

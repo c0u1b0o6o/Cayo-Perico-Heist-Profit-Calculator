@@ -146,7 +146,7 @@ export const ManualResultBoard: React.FC<ManualResultBoardProps> = ({
             <button onClick={handleDownloadImage} className="text-stone-400 hover:text-green-600 transition-all"><Download size={18} /></button>
         </div>
 
-        <div className="absolute -top-4 w-64 h-12 bg-blue-300 opacity-40 rotate-[-1deg] left-1/2 transform -translate-x-1/2 tape"></div>
+        <div className="absolute -top-4 w-64 h-12 bg-blue-300 opacity-40 -rotate-1 left-1/2 transform -translate-x-1/2 tape"></div>
         <h2 className="font-hand text-4xl text-center mb-8 text-blue-800 font-bold underline decoration-blue-300/50 underline-offset-8 decoration-wavy">{t.results.manualTitle}</h2>
 
         <div className="flex flex-col gap-8">
@@ -158,7 +158,7 @@ export const ManualResultBoard: React.FC<ManualResultBoardProps> = ({
                     </h3>
                     
                     {/* Pool Status (Inline for top layout) */}
-                    <div className="bg-white/90 p-3 rounded-xl border border-orange-100 shadow-sm flex-grow md:max-w-md">
+                    <div className="bg-white/90 p-3 rounded-xl border border-orange-100 shadow-sm grow md:max-w-md">
                         <div className="text-[10px] text-orange-700 font-black uppercase mb-2 flex items-center gap-1">
                              <span className="opacity-50">#</span> {t.results.availablePool}
                         </div>
@@ -228,7 +228,7 @@ export const ManualResultBoard: React.FC<ManualResultBoardProps> = ({
                 {/* Financial Breakdown */}
                 <div className="space-y-3 font-hand text-xl bg-white/30 p-6 rounded-2xl border-2 border-blue-200/50">
                     <h3 className="text-xs font-sans font-black uppercase text-blue-700 tracking-widest mb-4 flex items-center gap-2">
-                        <Info size={16} /> Manuel Calc
+                        <Info size={16} /> {t.results.manualFinancialBreakdown}
                     </h3>
                     <div className="flex justify-between border-b border-blue-200 pb-1 pt-2"><span>{t.results.primary}:</span><span className="font-bold">${Math.round(primaryValue).toLocaleString()}</span></div>
                     {wallSafeValue > 0 && <div className="flex justify-between border-b border-blue-200 pb-1 pt-1"><span>{t.results.wallSafe}:</span><span className="font-bold">${wallSafeValue.toLocaleString()}</span></div>}
@@ -250,20 +250,20 @@ export const ManualResultBoard: React.FC<ManualResultBoardProps> = ({
                 <div className="bg-white/60 p-8 rounded-2xl border-2 border-blue-200 font-hand flex flex-col items-center justify-center shadow-lg relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rotate-45 transform translate-x-12 -translate-y-12"></div>
                     <div className="text-center mb-8 relative z-10 w-full">
-                        <div className="text-[12px] text-blue-600 font-sans font-black uppercase tracking-[0.3em] mb-2 opacity-60">Final Manuel Take</div>
+                        <div className="text-[12px] text-blue-600 font-sans font-black uppercase tracking-[0.3em] mb-2 opacity-60">{t.results.finalManualTake}</div>
                         <div className="text-5xl font-bold text-blue-900 drop-shadow-sm tabular-nums transition-transform group-hover:scale-105">
                             ${Math.round(totalWithElite).toLocaleString()}
                         </div>
                     </div>
                     
                     <div className="w-full space-y-3 relative z-10 bg-white/40 p-5 rounded-xl border border-blue-50">
-                        <h4 className="text-[10px] font-sans font-black text-blue-800 uppercase tracking-widest border-b border-blue-100 pb-2 mb-3">Player Payouts</h4>
+                        <h4 className="text-[10px] font-sans font-black text-blue-800 uppercase tracking-widest border-b border-blue-100 pb-2 mb-3">{t.results.payouts}</h4>
                         {settings.cuts.map((cut, idx) => {
                             const playerCutValue = splitPot * (cut / 100);
                             const playerTotal = playerCutValue + (settings.eliteCommand ? elitePerPlayer : 0);
                             return (
                                 <div key={idx} className="flex justify-between items-center text-lg">
-                                    <span className="text-stone-500 font-bold">{idx === 0 ? "LEADER" : `MEMBER ${idx + 1}`} ({cut}%):</span>
+                                    <span className="text-stone-500 font-bold">{idx === 0 ? t.results.leader : `${t.results.member} ${idx + 1}`} ({cut}%):</span>
                                     <span className="font-bold tabular-nums text-blue-900 drop-shadow-sm">${Math.round(playerTotal).toLocaleString()}</span>
                                 </div>
                             );
