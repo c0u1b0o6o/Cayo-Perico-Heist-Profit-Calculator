@@ -6,9 +6,8 @@ import { calculateOptimalLoot } from '@/lib/algorithm';
 import { LootInput } from '@/components/LootInput';
 import { LootSummary } from '@/components/LootSummary';
 import { ResultBoard } from '@/components/ResultBoard';
-import { ManualResultBoard } from '@/components/ManualResultBoard';
-import { LanguageToggle } from '@/components/LanguageToggle';
 import { NavBar } from '@/components/NavBar';
+import { BasicData } from '@/components/BasicData';
 import { translations, Language } from '@/lib/translations';
 import { Check, Dices } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -339,23 +338,13 @@ export default function Home() {
                 wallSafeValue={wallSafeValue}
                 language={currentLang}
             />
-            
-            <ManualResultBoard 
-                bags={calculatedBags} 
-                settings={settings} 
-                basePrimaryValue={selectedPrimaryValue} 
-                wallSafeValue={wallSafeValue}
-                language={currentLang}
-                lootCounts={lootCounts}
-            />
           </div>
         )}
 
-        {/* Data Tab - Placeholder */}
+        {/* Data Tab */}
         {activeTab === 'data' && (
-          <div className="min-h-[60vh] flex flex-col items-center justify-center text-white/50 font-hand">
-            <h2 className="text-3xl mb-4 italic opacity-30 tracking-widest">{t.nav.data}</h2>
-            <p className="opacity-20">Coming Soon...</p>
+          <div className="flex justify-center">
+            <BasicData language={currentLang} />
           </div>
         )}
 

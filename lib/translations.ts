@@ -74,6 +74,20 @@ export interface Translation {
     finalManualTake: string;
     payouts: string;
   };
+  data: {
+    primaryTitle: string;
+    lootName: string;
+    primaryNormal: string;
+    primaryHard: string;
+    lootTable: string;
+    valuePerPile: string;
+    weightPerPile: string;
+    valuePerFullBag: string;
+    notes: string;
+    note1: string;
+    note2: string;
+    note3: string;
+  };
 }
 
 export const translations: Record<Language, Translation> = {
@@ -150,6 +164,20 @@ export const translations: Record<Language, Translation> = {
       manualFinancialBreakdown: "Manual Financial Breakdown",
       finalManualTake: "Final Manual Take",
       payouts: "Player Payouts",
+    },
+    data: {
+      primaryTitle: "Primary Target Values",
+      lootName: "Loot Name",
+      primaryNormal: "Normal Mode",
+      primaryHard: "Hard Mode",
+      lootTable: "Secondary Loot Reference",
+      valuePerPile: "Value / Pile",
+      weightPerPile: "Weight / Pile",
+      valuePerFullBag: "Value / Full Bag",
+      notes: "Notes",
+      note1: "Gold is the most valuable loot per weight.",
+      note2: "Cocaine is the best solo loot if gold is unavailable.",
+      note3: "Paintings take 50% bag space regardless of value.",
     }
   },
   tw: {
@@ -225,6 +253,20 @@ export const translations: Record<Language, Translation> = {
       manualFinancialBreakdown: "手動分紅結算",
       finalManualTake: "最終手動利潤",
       payouts: "成員分成",
+    },
+    data: {
+      primaryTitle: "主要目標價值表",
+      lootName: "財物名稱",
+      primaryNormal: "一般模式",
+      primaryHard: "困難模式",
+      lootTable: "次要財物參考表",
+      valuePerPile: "單堆價值",
+      weightPerPile: "佔用負重",
+      valuePerFullBag: "滿包價值",
+      notes: "注意事項",
+      note1: "黃金是單位價值最高的財物。",
+      note2: "古柯鹼是次優的選擇，且適合單人玩家。",
+      note3: "名畫固定佔用 50% 空間，不論其價值。",
     }
   },
   cn: {
@@ -300,6 +342,20 @@ export const translations: Record<Language, Translation> = {
       manualFinancialBreakdown: "手动分红结算",
       finalManualTake: "最终手动利润",
       payouts: "成员分成",
+    },
+    data: {
+      primaryTitle: "主要目标价值表",
+      lootName: "财物名称",
+      primaryNormal: "一般模式",
+      primaryHard: "困难模式",
+      lootTable: "次要财物参考表",
+      valuePerPile: "单堆价值",
+      weightPerPile: "占用负重",
+      valuePerFullBag: "满包价值",
+      notes: "注意事项",
+      note1: "黄金是单位价值最高的财物。",
+      note2: "古柯碱是次优的选择，且适合单人玩家。",
+      note3: "名画固定占用 50% 空间，不论其价值。",
     }
   }
 };
