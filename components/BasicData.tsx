@@ -47,7 +47,7 @@ export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
         <div className="overflow-x-auto">
           <table className="w-full text-left font-hand text-xl border-collapse">
             <thead>
-              <tr className="border-b-2 border-gray-200 text-gray-500 uppercase text-sm tracking-widest font-sans">
+              <tr className="border-b-2 border-gray-200 text-gray-500 uppercase text-sm tracking-widest font-hand font-bold">
                 <th className="py-3 px-4">{t.data.lootName}</th>
                 <th className="py-3 px-4 text-right">{t.data.primaryNormal}</th>
                 <th className="py-3 px-4 text-right">{t.data.primaryHard}</th>
@@ -57,8 +57,8 @@ export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
               {primaryTargets.map((target) => (
                 <tr key={target.name} className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors group">
                   <td className="py-4 px-4 font-bold text-gray-800">{t.loot[target.name as keyof typeof t.loot] || target.name}</td>
-                  <td className="py-4 px-4 text-right font-mono text-gray-600">${target.normal.toLocaleString()}</td>
-                  <td className="py-4 px-4 text-right text-red-700 font-bold font-mono group-hover:scale-110 transition-transform origin-right">
+                  <td className="py-4 px-4 text-right font-hand text-gray-600">${target.normal.toLocaleString()}</td>
+                  <td className="py-4 px-4 text-right text-red-700 font-bold font-hand group-hover:scale-110 transition-transform origin-right">
                     ${target.hard.toLocaleString()}
                   </td>
                 </tr>
@@ -78,7 +78,7 @@ export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
         <div className="overflow-x-auto">
           <table className="w-full text-left font-hand text-xl border-collapse">
             <thead>
-              <tr className="border-b-2 border-gray-200 text-gray-500 uppercase text-sm tracking-widest font-sans">
+              <tr className="border-b-2 border-gray-200 text-gray-500 uppercase text-sm tracking-widest font-hand font-bold">
                 <th className="py-3 px-4">{t.data.lootName}</th>
                 <th className="py-3 px-4 text-right">{t.data.valuePerPile}</th>
                 <th className="py-3 px-4 text-right">{t.data.weightPerPile}</th>
@@ -93,9 +93,9 @@ export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
                 return (
                   <tr key={loot.type} className={clsx("border-b border-gray-100 hover:bg-gray-50/50 transition-colors", textColorClass)}>
                     <td className="py-4 px-4 font-bold">{t.loot[loot.type as keyof typeof t.loot] || loot.type}</td>
-                    <td className="py-4 px-4 text-right font-bold font-mono">${loot.value.toLocaleString()}</td>
-                    <td className="py-4 px-4 text-right font-mono">{loot.weight}%</td>
-                    <td className="py-4 px-4 text-right font-black font-mono">
+                    <td className="py-4 px-4 text-right font-bold font-hand">${loot.value.toLocaleString()}</td>
+                    <td className="py-4 px-4 font-bold text-right font-hand">{loot.weight}%</td>
+                    <td className="py-4 px-4 text-right font-black font-hand">
                       ${fullBagValue.toLocaleString()}
                     </td>
                   </tr>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { LootCounts, PlayerSettings, Zone, LootType } from '@/lib/types';
 import { calculateOptimalLoot } from '@/lib/algorithm';
 import { LootInput } from '@/components/LootInput';
@@ -23,6 +23,8 @@ const PRIMARY_TARGETS: { nameKey: keyof typeof translations.en.loot; value: numb
   { nameKey: 'Madrazo Files', value: 1100000, id: 'files' },
 ];
 
+const STORAGE_KEY = 'cayo_perico_calculator_v2_state';
+
 export default function Home() {
   const [currentLang, setCurrentLang] = useState<Language>('tw');
   const t = translations[currentLang];
@@ -43,6 +45,43 @@ export default function Home() {
 
   const [lootCounts, setLootCounts] = useState<LootCounts>({});
   const [wallSafeValue, setWallSafeValue] = useState(0);
+
+  // Loading State
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Load data on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        if (data.currentLang) setCurrentLang(data.currentLang);
+        if (data.settings) setSettings(data.settings);
+        if (data.selectedPrimaryValue) setSelectedPrimaryValue(data.selectedPrimaryValue);
+        if (data.activeTab) setActiveTab(data.activeTab);
+        if (data.lootCounts) setLootCounts(data.lootCounts);
+        if (data.wallSafeValue !== undefined) setWallSafeValue(data.wallSafeValue);
+      } catch (err) {
+        console.error('Failed to parse saved state:', err);
+      }
+    }
+    setIsLoaded(true);
+  }, []);
+
+  // Save data on changes
+  useEffect(() => {
+    if (!isLoaded) return;
+    
+    const stateToSave = {
+      currentLang,
+      settings,
+      selectedPrimaryValue,
+      activeTab,
+      lootCounts,
+      wallSafeValue
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave));
+  }, [currentLang, settings, selectedPrimaryValue, activeTab, lootCounts, wallSafeValue, isLoaded]);
 
   const handlePlayerChange = (num: number) => {
     let newCuts = [100];
@@ -345,17 +384,6 @@ export default function Home() {
         {activeTab === 'data' && (
           <div className="flex justify-center">
             <BasicData language={currentLang} />
-          </div>
-        )}
-
-        {/* Contact Tab - Placeholder */}
-        {activeTab === 'contact' && (
-          <div className="min-h-[60vh] flex flex-col items-center justify-center text-white/50 font-hand">
-            <h2 className="text-3xl mb-4 italic opacity-30 tracking-widest">{t.nav.contact}</h2>
-            <p className="opacity-20 text-center">
-              Built with Antigravity AI<br/>
-              GTA 5 Cayo Perico Calculator
-            </p>
           </div>
         )}
 
