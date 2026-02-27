@@ -181,7 +181,7 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
 
             {/* Bag Recommendation */}
             <div className="md:col-span-1 p-4 bg-yellow-50 border-2 border-yellow-200 rounded dashed-border relative">
-                 <h3 className="font-hand text-xl font-bold mb-3 text-yellow-800">💰 {t.results.recommendation}</h3>
+                 <h3 className="font-hand text-xl font-bold mb-3 text-yellow-800"> {t.results.recommendation}</h3>
                  <div className="space-y-3 font-hand pr-2">
                     {bags.map((bag, i) => (
                         <div key={i} className="bg-white p-2 rounded border border-gray-100 shadow-sm">

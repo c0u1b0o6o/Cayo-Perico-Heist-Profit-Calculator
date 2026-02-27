@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Language, translations } from '@/lib/translations';
-import { User, ExternalLink, ShieldCheck, Database } from 'lucide-react';
+import { User, ExternalLink, ShieldCheck, Database, MessageSquare } from 'lucide-react';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import mainAvatar from '@/assets/avatar/main-avatar.png';
@@ -133,7 +133,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ language }) => {
                             >
                                 <div className={clsx("p-2 rounded text-white group-hover:scale-110 transition-transform shadow-sm", color)}>
                                     <Icon size={20} />
-                                </div>
+                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <div className="font-hand text-xl font-bold text-gray-800 truncate">
                                         <WordZoom text={name} />
@@ -143,6 +143,37 @@ export const ContactPage: React.FC<ContactPageProps> = ({ language }) => {
                                 <ExternalLink size={12} className="text-gray-300 group-hover:text-gray-900 shrink-0" />
                             </a>
                         ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Feedback Section */}
+            <div className="relative bg-[#d1e6e9] rounded-r-xl shadow-2xl p-1 border-l-20 border-[#a5c7cc] rotate-1">
+                <div className="bg-white/90 paper-texture p-6 md:p-8 shadow-inner relative overflow-hidden">
+                    <div className="flex flex-col md:flex-row items-center gap-6">
+                        <div className="bg-white p-3 shadow-lg transform -rotate-3 border border-gray-200 shrink-0">
+                             <div className="w-16 h-16 bg-cyan-100 flex items-center justify-center rounded">
+                                <MessageSquare className="text-cyan-600" size={32} />
+                             </div>
+                        </div>
+                        <div className="flex-1 text-center md:text-left">
+                            <h2 className="font-hand text-3xl font-black text-gray-900 mb-2">
+                                <WordZoom text={t.contact.feedback} />
+                            </h2>
+                            <p className="font-hand text-xl text-gray-600 mb-4 tracking-tighter sm:tracking-normal">
+                                <WordZoom text={t.contact.feedbackDesc} />
+                            </p>
+                            <a 
+                                href="https://github.com/c0u1b0o6o/Cayo-Perico-Heist-Profit-Calculator/issues"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-6 py-2 bg-gray-900 text-white font-hand text-xl rounded hover:bg-gray-800 transition-colors shadow-lg active:scale-95"
+                            >
+                                <GithubIcon size={20} />
+                                <span>GitHub Issues</span>
+                                <ExternalLink size={14} />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

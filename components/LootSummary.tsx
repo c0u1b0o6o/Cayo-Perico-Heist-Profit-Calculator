@@ -57,35 +57,34 @@ export const LootSummary: React.FC<LootSummaryProps> = ({ lootCounts, language }
         isCollapsed ? "max-h-0 opacity-0" : "max-h-[500px] opacity-100"
       )}>
         {hasAnyLoot ? (
-          <div className="space-y-4 pt-2">
+          <div className="flex items-end justify-around h-40 pt-4 pb-12 gap-3 mt-2">
             {Object.entries(lootTotals).map(([type, count]) => {
               if (count === 0) return null;
               
               const percentage = Math.min((count / MAX_VISUAL_COUNT) * 100, 100);
               const colorClass = 
                 type === 'Gold' ? 'bg-yellow-500' :
-                type === 'Coke' ? 'bg-blue-400' :
+                type === 'Coke' ? 'bg-stone-300' :
                 type === 'Weed' ? 'bg-green-500' :
-                type === 'Painting' ? 'bg-purple-500' :
-                'bg-stone-500';
+                type === 'Painting' ? 'bg-red-500' :
+                'bg-green-800'; // Cash
 
               return (
-                <div key={type} className="space-y-1">
-                  <div className="flex justify-between font-hand text-lg px-1">
-                    <span className="font-bold">{t.loot[type as keyof typeof t.loot] || type}</span>
-                    <span className="font-mono text-sm font-bold">x{count}</span>
-                  </div>
-                  <div className="h-4 bg-gray-200 rounded-sm overflow-hidden border border-gray-300 relative shadow-inner">
+                <div key={type} className="flex-1 flex flex-col items-center h-full relative group">
+                  {/* Vertical Bar Container (Base removed) */}
+                  <div className="w-full h-full relative">
                     <div 
-                      className={clsx("h-full transition-all duration-700 rounded-sm", colorClass)}
-                      style={{ width: `${percentage}%` }}
+                      className={clsx("absolute bottom-0 w-full transition-all duration-700 rounded-t-sm shadow-sm", colorClass)}
+                      style={{ height: `${percentage}%` }}
                     />
-                    {/* Sketchy segments indicator */}
-                    <div className="absolute inset-0 flex justify-between px-0 pointer-events-none opacity-10">
-                      {[...Array(MAX_VISUAL_COUNT)].map((_, i) => (
-                        <div key={i} className="w-px h-full bg-black" />
-                      ))}
-                    </div>
+                  </div>
+                  
+                  {/* Label below the bar */}
+                  <div className="absolute top-full mt-1 flex flex-col items-center w-full">
+                    <span className="font-mono text-xs font-bold leading-none mb-0.5">x{count}</span>
+                    <span className="font-hand text-[10px] sm:text-xs font-bold leading-tight text-center wrap-break-word w-full">
+                      {t.loot[type as keyof typeof t.loot] || type}
+                    </span>
                   </div>
                 </div>
               );

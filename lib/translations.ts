@@ -106,6 +106,8 @@ export interface Translation {
     secureConnection: string;
     stamp: string;
     bio: string;
+    feedback: string;
+    feedbackDesc: string;
   };
 }
 
@@ -169,8 +171,8 @@ export const translations: Record<Language, Translation> = {
       wallSafe: "Wall Safe",
       elite: "Elite Challenge",
       total: "Total Gross",
-      pavel: "Pavel Cut (2%)",
-      fence: "Fence Fee (10%)",
+      pavel: "Pavel Cut",
+      fence: "Fence Fee",
       cutsHeader: "Estimated Cuts:",
       leader: "Leader",
       member: "Member",
@@ -217,6 +219,8 @@ export const translations: Record<Language, Translation> = {
       secureConnection: "SECURE CONNECTION",
       stamp: "Sleepy",
       bio: "As the bottom-ranked student in computer science, I've mastered nothing but Vibe Coding. Please don't follow my example—it worries me. My goal is to learn how to play League of Legends, and I adore ahh brainrot memes. If you find any bugs, feel free to DM me on Discord. Honestly, no one will use my site anyway—just take it with a grain of salt.",
+      feedback: "Feedback",
+      feedbackDesc: "Found a bug or have a suggestion? Open an issue on GitHub. Maybe I'll fix it, maybe.:D",
     }
   },
   tw: {
@@ -277,8 +281,8 @@ export const translations: Record<Language, Translation> = {
       wallSafe: "保險箱",
       elite: "精英挑戰",
       total: "總收入",
-      pavel: "派沃分紅 (2%)",
-      fence: "洗錢費用 (10%)",
+      pavel: "派沃分紅",
+      fence: "洗錢費用",
       cutsHeader: "成員預估分紅:",
       leader: "隊長",
       member: "成員",
@@ -325,6 +329,8 @@ export const translations: Record<Language, Translation> = {
       secureConnection: "安全連線中",
       stamp: "我想睡覺",
       bio: "資工墊底大學生，學而不精因此只會Vibe Coding，請不要向我學習，我會擔心。目標是學會打Lol，我喜歡抽象迷因。若有任何Bug可以到Discord私訊我，阿反正也沒人會用我的網站，聽聽就好。",
+      feedback: "意見回饋",
+      feedbackDesc: "什麼？有Bug？我不是很想改拉，但為了你們，還是到Github上開Issue給我，我盡量去改:D。",
     }
   },
   cn: {
@@ -385,8 +391,8 @@ export const translations: Record<Language, Translation> = {
       wallSafe: "保险箱",
       elite: "精英挑战",
       total: "总收入",
-      pavel: "派沃分红 (2%)",
-      fence: "洗钱费用 (10%)",
+      pavel: "派沃分红",
+      fence: "洗钱费用",
       cutsHeader: "成员预估分红:",
       leader: "队长",
       member: "成员",
@@ -432,7 +438,9 @@ export const translations: Record<Language, Translation> = {
       serverStatus: "服务器状态",
       secureConnection: "安全连接中",
       stamp: "我想睡觉",
-      bio: "资工垫底大学生，学而不精因此只会Vibe Coding，请不要向我学习，我会担心。目标是学会打Lol，我喜欢抽象迷因。若有任何Bug可以到Discord私信我，阿反正也没人会用我的网站，听听就好。",
+      bio: "资工垫底大学生，学而不精因此只会Vibe Coding，請不要向我學習，我会担心。目标是学会打Lol，我喜欢抽象迷因。若有任何Bug可以到Discord私信我，阿反正也没人会用我的网站，听听就好。",
+      feedback: "意见反馈",
+      feedbackDesc: "什麽？有Bug？我不是很想改拉，但为了你们，还是到Github上开Issue给我，我尽量去改:D。",
     }
   }
 };

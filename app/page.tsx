@@ -130,7 +130,7 @@ export default function Home() {
     });
   };
 
-  const calculatedBags = useMemo(() => calculateOptimalLoot(lootCounts, settings.players), [lootCounts, settings.players]);
+  const calculatedBags = useMemo(() => calculateOptimalLoot(lootCounts, settings.players, settings.hardMode), [lootCounts, settings.players, settings.hardMode]);
   const cutsSum = settings.cuts.reduce((a, b) => a + b, 0);
 
   const tabs = ['prep', 'results', 'data', 'contact'];
