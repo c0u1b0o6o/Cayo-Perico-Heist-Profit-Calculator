@@ -18,6 +18,7 @@ export interface Translation {
     results: string;
     data: string;
     contact: string;
+    reset: string;
   };
   zones: {
     MainDockL: string;
@@ -88,6 +89,24 @@ export interface Translation {
     note2: string;
     note3: string;
   };
+  contact: {
+    title: string;
+    role: string;
+    status: string;
+    location: string;
+    roleValue: string;
+    statusValue: string;
+    locationValue: string;
+    authOnly: string;
+    intelTitle: string;
+    systemTitle: string;
+    version: string;
+    lastUpdated: string;
+    serverStatus: string;
+    secureConnection: string;
+    stamp: string;
+    bio: string;
+  };
 }
 
 export const translations: Record<Language, Translation> = {
@@ -108,9 +127,11 @@ export const translations: Record<Language, Translation> = {
       prep: "Prep Data",
       results: "Final Results",
       data: "Basic Data",
-      contact: "Contact Us",
+      contact: "Contact Dev",
+      reset: "Reset Data",
     },
     zones: {
+
       MainDockL: "Main Dock (L)",
       MainDockS: "Main Dock (S)",
       NorthStorage: "North Storage",
@@ -178,6 +199,24 @@ export const translations: Record<Language, Translation> = {
       note1: "Gold is the most valuable loot per weight.",
       note2: "Cocaine is the best solo loot if gold is unavailable.",
       note3: "Paintings take 50% bag space regardless of value.",
+    },
+    contact: {
+      title: "Developer Dossier",
+      role: "Role",
+      status: "Status",
+      location: "Location",
+      roleValue: "Low Cortisol Student",
+      statusValue: "Active",
+      locationValue: "Taiwan",
+      authOnly: "AUTHORIZED PERSONNEL ONLY",
+      intelTitle: "Contact Me",
+      systemTitle: "System Intelligence",
+      version: "Version",
+      lastUpdated: "Last Updated",
+      serverStatus: "Server Status",
+      secureConnection: "SECURE CONNECTION",
+      stamp: "Sleepy",
+      bio: "As the bottom-ranked student in computer science, I've mastered nothing but Vibe Coding. Please don't follow my example—it worries me. My goal is to learn how to play League of Legends, and I adore ahh brainrot memes. If you find any bugs, feel free to DM me on Discord. Honestly, no one will use my site anyway—just take it with a grain of salt.",
     }
   },
   tw: {
@@ -197,7 +236,8 @@ export const translations: Record<Language, Translation> = {
       prep: "前置",
       results: "最終分紅",
       data: "基礎數據",
-      contact: "聯絡我們",
+      contact: "聯絡開發者",
+      reset: "重置資料",
     },
     zones: {
       MainDockL: "大倉",
@@ -242,7 +282,7 @@ export const translations: Record<Language, Translation> = {
       cutsHeader: "成員預估分紅:",
       leader: "隊長",
       member: "成員",
-      recommendation: "系統建議（最佳化）",
+      recommendation: "系統建議",
       manualTitle: "手動分紅調節器",
       availablePool: "剩餘財物池",
       capacityWarning: "負重超出上限！",
@@ -267,6 +307,24 @@ export const translations: Record<Language, Translation> = {
       note1: "黃金是單位價值最高的財物。",
       note2: "古柯鹼是次優的選擇，且適合單人玩家。",
       note3: "名畫固定佔用 50% 空間，不論其價值。",
+    },
+    contact: {
+      title: "開發者檔案",
+      role: "職務",
+      status: "狀態",
+      location: "目前位置",
+      roleValue: "低皮質醇大學生",
+      statusValue: "線上",
+      locationValue: "臺灣",
+      authOnly: "僅限授權人員存取",
+      intelTitle: "聯繫我",
+      systemTitle: "系統情報",
+      version: "版本",
+      lastUpdated: "最後更新",
+      serverStatus: "伺服器狀態",
+      secureConnection: "安全連線中",
+      stamp: "我想睡覺",
+      bio: "資工墊底大學生，學而不精因此只會Vibe Coding，請不要向我學習，我會擔心。目標是學會打Lol，我喜歡抽象迷因。若有任何Bug可以到Discord私訊我，阿反正也沒人會用我的網站，聽聽就好。",
     }
   },
   cn: {
@@ -286,7 +344,8 @@ export const translations: Record<Language, Translation> = {
       prep: "前置",
       results: "最终分红",
       data: "基础数据",
-      contact: "联系我们",
+      contact: "联系开发者",
+      reset: "重置资料",
     },
     zones: {
       MainDockL: "大仓",
@@ -331,7 +390,7 @@ export const translations: Record<Language, Translation> = {
       cutsHeader: "成员预估分红:",
       leader: "队长",
       member: "成员",
-      recommendation: "系统建议（最优化）",
+      recommendation: "系統建議",
       manualTitle: "手动分红调节器",
       availablePool: "剩余财物池",
       capacityWarning: "负重超出上限！",
@@ -356,6 +415,24 @@ export const translations: Record<Language, Translation> = {
       note1: "黄金是单位价值最高的财物。",
       note2: "古柯碱是次优的选择，且适合单人玩家。",
       note3: "名画固定占用 50% 空间，不论其价值。",
+    },
+    contact: {
+      title: "開發者檔案",
+      role: "職務",
+      status: "狀態",
+      location: "目前位置",
+      roleValue: "低皮质醇大学生",
+      statusValue: "在线",
+      locationValue: "台湾",
+      authOnly: "仅限授权人员存取",
+      intelTitle: "联系我",
+      systemTitle: "系统情报",
+      version: "版本",
+      lastUpdated: "最后更新",
+      serverStatus: "服务器状态",
+      secureConnection: "安全连接中",
+      stamp: "我想睡觉",
+      bio: "资工垫底大学生，学而不精因此只会Vibe Coding，请不要向我学习，我会担心。目标是学会打Lol，我喜欢抽象迷因。若有任何Bug可以到Discord私信我，阿反正也没人会用我的网站，听听就好。",
     }
   }
 };

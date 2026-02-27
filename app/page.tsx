@@ -8,6 +8,7 @@ import { LootSummary } from '@/components/LootSummary';
 import { ResultBoard } from '@/components/ResultBoard';
 import { NavBar } from '@/components/NavBar';
 import { BasicData } from '@/components/BasicData';
+import { ContactPage } from '@/components/ContactPage';
 import { translations, Language } from '@/lib/translations';
 import { Check, Dices } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -94,18 +95,14 @@ export default function Home() {
 
   const handleCutChange = (playerIndex: number, delta: number) => {
     setSettings(s => {
-      const newCuts = [...s.cuts];
-      const newVal = Math.max(0, Math.min(100, newCuts[playerIndex] + delta));
+      if (s.players === 1) return s;
       
-      if (playerIndex === 0) {
-        newCuts[0] = newVal;
-      } else {
-        const diff = newVal - newCuts[playerIndex];
-        if (newCuts[0] - diff >= 0) {
-          newCuts[playerIndex] = newVal;
-          newCuts[0] -= diff;
-        }
-      }
+      const newCuts = [...s.cuts];
+      const minCut = 15;
+      const maxCut = 100 - (s.players - 1) * 15;
+      
+      const newVal = Math.max(minCut, Math.min(maxCut, newCuts[playerIndex] + delta));
+      newCuts[playerIndex] = newVal;
       return { ...s, cuts: newCuts };
     });
   };
@@ -173,6 +170,7 @@ export default function Home() {
         onTabChange={setActiveTab}
         language={currentLang}
         onLanguageChange={setCurrentLang}
+        onReset={handleReset}
       />
 
       {/* Left Navigation Zone */}
@@ -308,24 +306,29 @@ export default function Home() {
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-24 h-8 bg-blue-200 opacity-50 rotate-1 tape"></div>
                 <h2 className="font-hand text-2xl mb-4 text-blue-800 border-b-2 border-blue-400 pb-1 font-bold">{t.settings.cuts}</h2>
                 <div className="space-y-3 font-hand">
-                    {settings.cuts.map((cut, idx) => (
-                        <div key={idx} className="flex items-center justify-between">
-                            <span className="text-lg">{idx === 0 ? t.results.leader : `${t.results.member} ${idx + 1}`}</span>
-                            <div className="flex items-center gap-2">
-                                <button 
-                                    onClick={() => handleCutChange(idx, -5)}
-                                    className="w-6 h-6 flex items-center justify-center bg-blue-200 rounded hover:bg-blue-300 transition-colors"
-                                    disabled={cut <= 0}
-                                >-</button>
-                                <span className="w-10 text-center font-bold">{cut}%</span>
-                                <button 
-                                    onClick={() => handleCutChange(idx, 5)}
-                                    className="w-6 h-6 flex items-center justify-center bg-blue-200 rounded hover:bg-blue-300 transition-colors"
-                                    disabled={cutsSum >= 100 && idx !== 0}
-                                >+</button>
+                    {settings.cuts.map((cut, idx) => {
+                        const minAllowed = settings.players > 1 ? 15 : 100;
+                        const maxAllowed = settings.players > 1 ? 100 - (settings.players - 1) * 15 : 100;
+                        
+                        return (
+                            <div key={idx} className="flex items-center justify-between">
+                                <span className="text-lg">{idx === 0 ? t.results.leader : `${t.results.member} ${idx + 1}`}</span>
+                                <div className="flex items-center gap-2">
+                                    <button 
+                                        onClick={() => handleCutChange(idx, -5)}
+                                        className="w-6 h-6 flex items-center justify-center bg-blue-200 rounded hover:bg-blue-300 transition-colors"
+                                        disabled={cut <= minAllowed}
+                                    >-</button>
+                                    <span className="w-10 text-center font-bold">{cut}%</span>
+                                    <button 
+                                        onClick={() => handleCutChange(idx, 5)}
+                                        className="w-6 h-6 flex items-center justify-center bg-blue-200 rounded hover:bg-blue-300 transition-colors"
+                                        disabled={cut >= maxAllowed}
+                                    >+</button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                     {cutsSum !== 100 && (
                         <p className="text-red-500 text-xs mt-2 italic font-sans">{t.settings.cutsNote} (Total: {cutsSum}%)</p>
                     )}
@@ -387,7 +390,12 @@ export default function Home() {
           </div>
         )}
 
-       <footer className="text-center mt-12 text-gray-500 text-sm font-hand">
+        {/* Contact Tab */}
+        {activeTab === 'contact' && (
+          <ContactPage language={currentLang} />
+        )}
+
+        <footer className="text-center mt-12 text-gray-500 text-sm font-hand">
             <p>Cayo Perico Heist Calculator &copy; 2026</p>
         </footer>
       </div>

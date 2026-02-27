@@ -2,19 +2,22 @@ import React from 'react';
 import { Language, translations } from '@/lib/translations';
 import { clsx } from 'clsx';
 import { LanguageToggle } from './LanguageToggle';
+import { RotateCcw } from 'lucide-react';
 
 interface NavBarProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
   language: Language;
   onLanguageChange: (lang: Language) => void;
+  onReset: () => void;
 }
 
 export const NavBar: React.FC<NavBarProps> = ({ 
   activeTab, 
   onTabChange, 
   language, 
-  onLanguageChange 
+  onLanguageChange,
+  onReset
 }) => {
   const t = translations[language];
 
@@ -22,6 +25,7 @@ export const NavBar: React.FC<NavBarProps> = ({
     { id: 'prep', label: t.nav.prep },
     { id: 'results', label: t.nav.results },
     { id: 'data', label: t.nav.data },
+    { id: 'contact', label: t.nav.contact },
   ];
 
   return (
@@ -58,7 +62,15 @@ export const NavBar: React.FC<NavBarProps> = ({
           </div>
 
           {/* Language Toggle - Right */}
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end gap-3">
+            <button
+              onClick={onReset}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded bg-red-900/40 hover:bg-red-700/60 text-red-200 border border-red-800/50 transition-all font-hand text-sm group"
+              title={t.nav.reset}
+            >
+              <RotateCcw size={14} className="group-hover:-rotate-45 transition-transform" />
+              <span className="font-bold">{t.nav.reset}</span>
+            </button>
             <LanguageToggle currentLang={language} onLanguageChange={onLanguageChange} />
           </div>
         </div>
@@ -73,7 +85,16 @@ export const NavBar: React.FC<NavBarProps> = ({
             >
               Cayo Perico Calculator
             </button>
-            <LanguageToggle currentLang={language} onLanguageChange={onLanguageChange} />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onReset}
+                className="p-1.5 rounded bg-red-900/40 text-red-200 border border-red-800/50"
+                aria-label={t.nav.reset}
+              >
+                <RotateCcw size={16} />
+              </button>
+              <LanguageToggle currentLang={language} onLanguageChange={onLanguageChange} />
+            </div>
           </div>
 
           {/* Bottom Row: Nav Tabs */}
