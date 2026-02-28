@@ -10,6 +10,7 @@ import { ZoneInstructions } from '@/components/ZoneInstructions';
 import { NavBar } from '@/components/NavBar';
 import { BasicData } from '@/components/BasicData';
 import { ContactPage } from '@/components/ContactPage';
+import { FAQPage } from '@/components/FAQPage';
 import { translations, Language } from '@/lib/translations';
 import { Check, Dices } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -171,22 +172,54 @@ export default function Home() {
         <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "SoftwareApplication",
-                    "name": "Cayo Perico Heist Profit Calculator",
-                    "operatingSystem": "Web",
-                    "applicationCategory": "CalculatorApplication",
-                    "description": "An optimal loot planner and profit calculator for the GTA Online Cayo Perico Heist.",
-                    "offers": {
-                        "@type": "Offer",
-                        "price": "0"
+                __html: JSON.stringify([
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "SoftwareApplication",
+                        "name": "Cayo Perico Heist Profit Calculator",
+                        "operatingSystem": "Web",
+                        "applicationCategory": "CalculatorApplication",
+                        "description": "An optimal loot planner and profit calculator for the GTA Online Cayo Perico Heist.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "0"
+                        },
+                        "author": {
+                            "@type": "Person",
+                            "name": "Antigravity"
+                        }
                     },
-                    "author": {
-                        "@type": "Person",
-                        "name": "Antigravity"
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "FAQPage",
+                        "mainEntity": [
+                            {
+                                "@type": "Question",
+                                "name": t.seo.faq1Q,
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": t.seo.faq1A
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": t.seo.faq2Q,
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": t.seo.faq2A
+                                }
+                            },
+                            {
+                                "@type": "Question",
+                                "name": t.seo.faq3Q,
+                                "acceptedAnswer": {
+                                    "@type": "Answer",
+                                    "text": t.seo.faq3A
+                                }
+                            }
+                        ]
                     }
-                })
+                ])
             }}
         />
 
@@ -422,6 +455,11 @@ export default function Home() {
         {/* Contact Tab */}
         {activeTab === 'contact' && (
           <ContactPage language={currentLang} />
+        )}
+
+        {/* FAQ Tab */}
+        {activeTab === 'faq' && (
+          <FAQPage language={currentLang} />
         )}
 
         <footer className="text-center mt-12 text-gray-500 text-sm font-hand">

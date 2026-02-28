@@ -18,6 +18,7 @@ export interface Translation {
     results: string;
     data: string;
     contact: string;
+    faq: string;
     reset: string;
   };
   zones: {
@@ -112,6 +113,15 @@ export interface Translation {
     feedback: string;
     feedbackDesc: string;
   };
+  seo: {
+    faqTitle: string;
+    faq1Q: string;
+    faq1A: string;
+    faq2Q: string;
+    faq2A: string;
+    faq3Q: string;
+    faq3A: string;
+  };
 }
 
 export const translations: Record<Language, Translation> = {
@@ -133,6 +143,7 @@ export const translations: Record<Language, Translation> = {
       results: "Final Results",
       data: "Basic Data",
       contact: "Contact Dev",
+      faq: "FAQ",
       reset: "Reset Data",
     },
     zones: {
@@ -227,6 +238,15 @@ export const translations: Record<Language, Translation> = {
       bio: "As the bottom-ranked student in computer science, I've mastered nothing but Vibe Coding. Please don't follow my example—it worries me. My goal is to learn how to play League of Legends, and I adore ahh brainrot memes. If you find any bugs, feel free to DM me on Discord. Honestly, no one will use my site anyway—just take it with a grain of salt.",
       feedback: "Feedback",
       feedbackDesc: "Found a bug or have a suggestion? Open an issue on GitHub. Maybe I'll fix it, maybe.:D",
+    },
+    seo: {
+      faqTitle: "Cayo Perico Heist FAQ & Guide",
+      faq1Q: "What is the most valuable secondary loot in Cayo Perico?",
+      faq1A: "Gold is the most valuable secondary loot per weight unit, followed by Cocaine, Weed, Paintings, and Cash. However, Gold requires two players to access.",
+      faq2Q: "Can you get Gold playing Solo in Cayo Perico?",
+      faq2A: "No, solo players cannot access Gold as it requires two people to simultaneously swipe keycards. Solo players should focus on finding Cocaine or Weed at the Main Docks, North Dock, or Airstrip to maximize profit.",
+      faq3Q: "What is the maximum possible payout for the Cayo Perico Heist?",
+      faq3A: "The maximum payout requires getting the Panther Statue on Hard Mode, filling all bags completely with Gold (requires 4 players), and completing the Elite Challenge. This can push the total gross take well over $5 million.",
     }
   },
   tw: {
@@ -247,6 +267,7 @@ export const translations: Record<Language, Translation> = {
       results: "最終分紅",
       data: "基礎數據",
       contact: "聯絡開發者",
+      faq: "FAQ",
       reset: "重置資料",
     },
     zones: {
@@ -340,6 +361,15 @@ export const translations: Record<Language, Translation> = {
       bio: "資工墊底大學生，學而不精因此只會Vibe Coding，請不要向我學習，我會擔心。目標是學會打Lol，我喜歡抽象迷因。若有任何Bug可以到Discord私訊我，阿反正也沒人會用我的網站，聽聽就好。",
       feedback: "意見回饋",
       feedbackDesc: "什麼？有Bug？我不是很想改拉，但為了你們，還是到Github上開Issue給我，我盡量去改:D。",
+    },
+    seo: {
+      faqTitle: "佩里克島搶劫 常見問題與收益指南",
+      faq1Q: "佩里克島搶劫中價值最高的次要財物是什麼？",
+      faq1A: "若以單位重量價值計算，黃金是價值最高的次要財物，其次依序為古柯鹼、大麻、名畫和現金。不過，黃金通常被鎖在需要雙門禁卡的房間內，必須要有至少兩名玩家才能取得。",
+      faq2Q: "單人遊玩佩里克島可以拿黃金嗎？",
+      faq2A: "不行，單人玩家無法取得黃金，因為開門需要兩人同時刷卡。單人玩家若想收益最大化，應該優先在主碼頭、北碼頭或機場尋找古柯鹼，其次是大麻。",
+      faq3Q: "佩里克島搶劫的最高總收益可以達到多少？",
+      faq3A: "要達到理論最高收益，需要主要目標為獵豹雕像 (活動限定) 且為困難模式，加上四名玩家將背包全塞滿黃金，並達成精英挑戰。這樣總收益有機會突破 500 萬遊戲幣。",
     }
   },
   cn: {
@@ -360,6 +390,7 @@ export const translations: Record<Language, Translation> = {
       results: "最终分红",
       data: "基础数据",
       contact: "联系开发者",
+      faq: "FAQ",
       reset: "重置资料",
     },
     zones: {
@@ -453,6 +484,15 @@ export const translations: Record<Language, Translation> = {
       bio: "资工垫底大学生，学而不精因此只会Vibe Coding，請不要向我學習，我会担心。目标是学会打Lol，我喜欢抽象迷因。若有任何Bug可以到Discord私信我，阿反正也没人会用我的网站，听听就好。",
       feedback: "意见反馈",
       feedbackDesc: "什麽？有Bug？我不是很想改拉，但为了你们，还是到Github上开Issue给我，我尽量去改:D。",
+    },
+    seo: {
+      faqTitle: "佩里科岛抢劫 常见问题与收益指南",
+      faq1Q: "佩里科岛抢劫中价值最高的次要财物是什么？",
+      faq1A: "若以单位重量价值计算，黄金是价值最高的次要财物，其次依序为古柯碱、大麻、名画和现金。不过，黄金通常被锁在需要双门禁卡的房间内，必须要有至少两名玩家才能取得。",
+      faq2Q: "单人游玩佩里科岛可以拿黄金吗？",
+      faq2A: "不行，单人玩家无法取得黄金，因为开门需要两人同时刷卡。单人玩家若想收益最大化，应该优先在主码头、北码头或机场寻找古柯碱，其次是大麻。",
+      faq3Q: "佩里科岛抢劫的最高总收益可以达到多少？",
+      faq3A: "要达到理论最高收益，需要主要目标为猎豹雕像 (活动限定) 且为困难模式，加上四名玩家将背包全塞满黄金，并达成精英挑战。这样总收入有机会突破 500 万游戏币。",
     }
   }
 };
