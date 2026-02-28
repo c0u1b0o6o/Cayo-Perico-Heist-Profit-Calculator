@@ -93,9 +93,9 @@ export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
                 return (
                   <tr key={loot.type} className={clsx("border-b border-gray-100 hover:bg-gray-50/50 transition-colors", textColorClass)}>
                     <td className="py-4 px-4 font-bold">{t.loot[loot.type as keyof typeof t.loot] || loot.type}</td>
-                    <td className="py-4 px-4 text-right font-bold font-hand">${loot.value.toLocaleString()}</td>
-                    <td className="py-4 px-4 font-bold text-right font-hand">{loot.weight}%</td>
-                    <td className="py-4 px-4 text-right font-black font-hand">
+                    <td className="py-4 text-black px-4 text-right font-hand">${loot.value.toLocaleString()}</td>
+                    <td className="py-4 text-black px-4 text-right font-hand">{loot.weight}%</td>
+                    <td className="py-4 text-red-700 px-4 text-right font-black font-hand">
                       ${fullBagValue.toLocaleString()}
                     </td>
                   </tr>
@@ -103,28 +103,6 @@ export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
               })}
             </tbody>
           </table>
-        </div>
-
-        <div className="mt-10 p-6 bg-yellow-50/50 border-2 border-dashed border-yellow-200 rounded-lg text-gray-700 italic paper-texture relative overflow-hidden">
-          <div className="absolute -top-1 -right-1 w-12 h-12 bg-yellow-100/50 rotate-45 transform translate-x-6 -translate-y-6"></div>
-          <h3 className="font-hand text-2xl font-bold mb-3 text-yellow-800 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
-            {t.data.notes}
-          </h3>
-          <ul className="space-y-2 font-hand text-lg">
-            <li className="flex gap-2">
-              <span className="text-yellow-600 font-bold">•</span>
-              <span>{t.data.note1}</span>
-            </li>
-            <li className="flex gap-2">
-              <span className="text-yellow-600 font-bold">•</span>
-              <span>{t.data.note2}</span>
-            </li>
-            <li className="flex gap-2">
-              <span className="text-yellow-600 font-bold">•</span>
-              <span>{t.data.note3}</span>
-            </li>
-          </ul>
         </div>
       </div>
     </div>

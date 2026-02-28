@@ -42,7 +42,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ language }) => {
                   <span className="text-stone-500 group-open:rotate-180 transition-transform font-body text-sm">▼</span>
               </summary>
               <div className="mt-3 pl-4 border-l-4 border-stone-800">
-                <p className="font-hand text-body-large text-stone-700 leading-relaxed font-bold">
+                <p className="font-hand text-body-normal text-gray-600 leading-relaxed">
                   {faq.a}
                 </p>
               </div>

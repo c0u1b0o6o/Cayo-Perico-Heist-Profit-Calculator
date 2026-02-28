@@ -61,7 +61,7 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
       rotateClass
     )}>
       {/* Tape */}
-      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-20 h-7 bg-white/40 backdrop-blur-[1px] rotate-1 shadow-sm border-x border-black/5 tape"></div>
+      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-16 h-4 bg-white/40 backdrop-blur-[1px] rotate-1 shadow-sm border-x border-black/5 tape"></div>
       
       <div className="flex items-center gap-2 mb-2 border-b border-black/10 pb-1">
         {icon}
@@ -166,7 +166,7 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
         </div>
 
         {/* Tape */}
-        <div className="absolute -top-3 w-48 h-10 bg-gray-300 opacity-40 rotate-1 left-1/2 transform -translate-x-1/2 tape"></div>
+        <div className="absolute -top-3 w-32 h-6 bg-gray-300 opacity-40 rotate-1 left-1/2 transform -translate-x-1/2 tape"></div>
 
         <h2 className="font-hand text-heading-2 text-center mb-6 text-green-800 font-bold">{t.results.title}</h2>
 

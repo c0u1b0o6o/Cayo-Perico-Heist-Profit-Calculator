@@ -38,7 +38,7 @@ export const LootInput: React.FC<LootInputProps> = ({ zone, lootCounts, onChange
       )}
       
       {/* Tape */}
-      <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-4 bg-yellow-100/20 rotate-1 tape" />
+      <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-3 bg-yellow-100/20 rotate-1 tape" />
       
       <h3 className="font-hand text-xl mb-4 text-yellow-500 tracking-wider text-center">
         {t.zones[zone] || zone}
