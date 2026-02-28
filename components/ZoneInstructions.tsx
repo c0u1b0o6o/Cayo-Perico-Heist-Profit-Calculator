@@ -13,6 +13,34 @@ interface ZoneInstructionsProps {
 export const ZoneInstructions: React.FC<ZoneInstructionsProps> = ({ bags, language }) => {
   const t = translations[language];
   const [startIndex, setStartIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && startIndex + 1 < totalZones) {
+      handleNext();
+    }
+    if (isRightSwipe && startIndex > 0) {
+      handlePrev();
+    }
+  };
 
   // Predefined Zone Sorting Order
   const ZONE_ORDER = ['MainDockL', 'MainDockS', 'Office', 'Basement', 'SouthStorage', 'NorthStorage', 'WestStorage'];
@@ -53,8 +81,8 @@ export const ZoneInstructions: React.FC<ZoneInstructionsProps> = ({ bags, langua
       <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/40 backdrop-blur-[1px] rotate-1 shadow-sm border-x border-black/5 tape"></div>
       
       <div className="flex items-center gap-2 mb-4 border-b border-black/10 pb-2">
-        <Map size={24} className="text-yellow-700" />
-        <h4 className="font-hand text-2xl font-bold text-gray-800">{title}</h4>
+
+        <h3 className="font-hand text-2xl font-bold text-gray-800">{title}</h3>
       </div>
       <div className="font-hand space-y-4">
         {children}
@@ -80,23 +108,32 @@ export const ZoneInstructions: React.FC<ZoneInstructionsProps> = ({ bags, langua
 
   return (
     <div className="w-full max-w-5xl mx-auto mt-12 mb-20 px-4 group/carousel">
-      <div className="relative">
-        {/* Navigation Buttons */}
+      <div 
+        className="relative"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        {/* Navigation Buttons - Desktop Only with Animated Text Arrows */}
         {startIndex > 0 && (
           <button 
             onClick={handlePrev}
-            className="absolute -left-4 sm:-left-16 top-1/2 -translate-y-1/2 p-2 bg-yellow-400/20 hover:bg-yellow-400/40 rounded-full transition-all text-yellow-800 z-20 backdrop-blur-sm shadow-sm"
+            className="absolute -left-4 sm:-left-20 top-1/2 -translate-y-1/2 p-4 text-white hover:text-white transition-all duration-500 z-20 group/btn hidden md:block"
           >
-            <ChevronLeft size={32} />
+            <span className="font-hand text-6xl md:text-8xl font-black block transition-transform duration-500 group-hover/btn:-translate-x-3 group-hover/btn:scale-110 select-none">
+              &lt;
+            </span>
           </button>
         )}
         
         {startIndex + 1 < totalZones && (
           <button 
             onClick={handleNext}
-            className="absolute -right-4 sm:-right-16 top-1/2 -translate-y-1/2 p-2 bg-yellow-400/20 hover:bg-yellow-400/40 rounded-full transition-all text-yellow-800 z-20 backdrop-blur-sm shadow-sm"
+            className="absolute -right-4 sm:-right-20 top-1/2 -translate-y-1/2 p-4 text-white hover:text-white transition-all duration-500 z-20 group/btn hidden md:block"
           >
-            <ChevronRight size={32} />
+            <span className="font-hand text-6xl md:text-8xl font-black block transition-transform duration-500 group-hover/btn:translate-x-3 group-hover/btn:scale-110 select-none">
+              &gt;
+            </span>
           </button>
         )}
 
