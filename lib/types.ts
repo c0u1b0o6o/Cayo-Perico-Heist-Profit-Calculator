@@ -40,6 +40,7 @@ export interface BagItem {
   type: LootType;
   percentage: number; // Amount of this item taken (e.g., 66.67 for full pile, or partial)
   value: number;
+  zone?: Zone;
 }
 
 export interface PlayerBag {

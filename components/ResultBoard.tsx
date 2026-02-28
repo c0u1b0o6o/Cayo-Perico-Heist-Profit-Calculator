@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { PlayerBag, PlayerSettings } from '@/lib/types';
+import { PlayerBag, PlayerSettings, LOOT_SPECS, BagItem } from '@/lib/types';
 import { BagProgressBar } from './BagProgressBar';
 import { toPng, toBlob } from 'html-to-image';
-import { Download, Copy, Check, Loader2 } from 'lucide-react';
+import { Download, Copy, Check, Loader2, Paperclip, Map, Briefcase } from 'lucide-react';
 import { translations, Language } from '@/lib/translations';
 import { clsx } from 'clsx';
 
@@ -20,10 +20,63 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
   const [isExporting, setIsExporting] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
+  // Helper to aggregate instructions for ALL players by zone
+  const getAllZoneInstructions = () => {
+    const zones: Record<string, Record<number, Record<string, number>>> = {};
+    bags.forEach((bag, pIdx) => {
+      bag.items.forEach(item => {
+        if (!item.zone) return;
+        const zoneName = t.zones[item.zone];
+        if (!zones[zoneName]) zones[zoneName] = {};
+        if (!zones[zoneName][pIdx]) zones[zoneName][pIdx] = {};
+        const count = item.percentage / LOOT_SPECS[item.type].weight;
+        zones[zoneName][pIdx][item.type] = (zones[zoneName][pIdx][item.type] || 0) + count;
+      });
+    });
+    return zones;
+  };
+
+  // Helper to aggregate total loot for each player
+  const getPlayerSummaries = () => {
+    return bags.map(bag => {
+      const summary: Record<string, number> = {};
+      bag.items.forEach(item => {
+        const count = item.percentage / LOOT_SPECS[item.type].weight;
+        summary[item.type] = (summary[item.type] || 0) + count;
+      });
+      return summary;
+    });
+  };
+
+  const StickyNote: React.FC<{ 
+    title: string; 
+    children: React.ReactNode; 
+    colorClass: string; 
+    rotateClass: string;
+    icon?: React.ReactNode;
+  }> = ({ title, children, colorClass, rotateClass, icon }) => (
+    <div className={clsx(
+      "p-4 shadow-xl paper-texture relative min-h-[160px] flex flex-col transition-all hover:scale-110 hover:z-30 cursor-default active:scale-95 group border border-black/5",
+      colorClass,
+      rotateClass
+    )}>
+      {/* Tape */}
+      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-20 h-7 bg-white/40 backdrop-blur-[1px] rotate-1 shadow-sm border-x border-black/5 tape"></div>
+      
+      <div className="flex items-center gap-2 mb-2 border-b border-black/10 pb-1">
+        {icon}
+        <h4 className="font-hand text-xl font-bold text-gray-800">{title}</h4>
+      </div>
+      <div className="font-hand text-base grow space-y-1">
+        {children}
+      </div>
+    </div>
+  );
+
   // Aggregate
   const secondaryTotal = bags.reduce((sum, bag) => sum + bag.totalValue, 0);
   
-  // Calculate Primary with Hard Mode bonus
+  // Calculate Primary... (remaining logic remains the same)
   const primaryValue = basePrimaryValue * (settings.hardMode ? 1.1 : 1.0);
   
   // Elite Bonus
@@ -122,35 +175,35 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
             <div className="space-y-2 font-hand text-xl md:col-span-1">
                 <div className="flex justify-between border-b border-green-300 pb-1">
                     <span>{t.results.primary}:</span>
-                    <span className="font-bold">${Math.round(primaryValue).toLocaleString()}</span>
+                    <span className="font-bold tabular-nums">${Math.round(primaryValue).toLocaleString()}</span>
                 </div>
                 {wallSafeValue > 0 && (
                     <div className="flex justify-between border-b border-green-300 pb-1">
                         <span>{t.results.wallSafe}:</span>
-                        <span className="font-bold">${wallSafeValue.toLocaleString()}</span>
+                        <span className="font-bold tabular-nums">${wallSafeValue.toLocaleString()}</span>
                     </div>
                 )}
                 <div className="flex justify-between border-b border-green-300 pb-1">
                     <span>{t.results.secondary}:</span>
-                    <span className="font-bold">${Math.round(secondaryTotal).toLocaleString()}</span>
+                    <span className="font-bold tabular-nums">${Math.round(secondaryTotal).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between border-b border-green-300 pb-1 text-green-700">
                     <span>{t.results.elite}:</span>
-                    <span>{eliteTotal > 0 ? `+$${eliteTotal.toLocaleString()}` : '$0'}</span>
+                    <span className="tabular-nums">{eliteTotal > 0 ? `+$${eliteTotal.toLocaleString()}` : '$0'}</span>
                 </div>
                 <div className="flex justify-between border-t-2 border-green-600 pt-2 font-bold text-2xl">
                     <span>{t.results.total}:</span>
-                    <span>${Math.round(grossTake).toLocaleString()}</span>
+                    <span className="tabular-nums">${Math.round(grossTake).toLocaleString()}</span>
                 </div>
                 
                 <div className="pt-4 text-red-600 text-base space-y-1">
                     <div className="flex justify-between">
                         <span>{t.results.fence} (10%):</span>
-                        <span>-${Math.round(fenceFee).toLocaleString()}</span>
+                        <span className="tabular-nums">-${Math.round(fenceFee).toLocaleString()}</span>
                     </div>
                      <div className="flex justify-between">
                         <span>{t.results.pavel} (2%):</span>
-                        <span>-${Math.round(pavelFee).toLocaleString()}</span>
+                        <span className="tabular-nums">-${Math.round(pavelFee).toLocaleString()}</span>
                     </div>
                 </div>
             </div>
@@ -159,7 +212,7 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
             <div className="md:col-span-1 bg-green-50 p-4 rounded border border-green-200 font-hand flex flex-col justify-center">
                 <div className="text-center mb-6">
                     <div className="text-sm text-gray-600 font-sans mb-1 uppercase tracking-widest">Potential Take</div>
-                    <span className="text-4xl font-bold text-green-900 drop-shadow-sm">
+                    <span className="text-4xl font-bold text-green-900 drop-shadow-sm tabular-nums">
                         ${Math.round(totalWithElite).toLocaleString()}
                     </span>
                 </div>
@@ -172,7 +225,7 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
                         return (
                             <div key={idx} className="flex justify-between">
                                 <span>{idx === 0 ? t.results.leader : `${t.results.member} ${idx + 1}`} ({cut}%):</span>
-                                <span className="font-bold">${Math.round(playerTotal).toLocaleString()}</span>
+                                <span className="font-bold tabular-nums">${Math.round(playerTotal).toLocaleString()}</span>
                             </div>
                         );
                     })}

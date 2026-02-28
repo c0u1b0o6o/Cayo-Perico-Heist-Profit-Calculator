@@ -6,6 +6,7 @@ import { calculateOptimalLoot } from '@/lib/algorithm';
 import { LootInput } from '@/components/LootInput';
 import { LootSummary } from '@/components/LootSummary';
 import { ResultBoard } from '@/components/ResultBoard';
+import { ZoneInstructions } from '@/components/ZoneInstructions';
 import { NavBar } from '@/components/NavBar';
 import { BasicData } from '@/components/BasicData';
 import { ContactPage } from '@/components/ContactPage';
@@ -164,7 +165,31 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-board-bg">
+    <main className="min-h-screen bg-grid p-4 sm:p-8 font-body relative overflow-hidden">
+        {/* SEO: Semantic H1 and Structured Data */}
+        <h1 className="sr-only">Cayo Perico Heist Profit Calculator</h1>
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "SoftwareApplication",
+                    "name": "Cayo Perico Heist Profit Calculator",
+                    "operatingSystem": "Web",
+                    "applicationCategory": "CalculatorApplication",
+                    "description": "An optimal loot planner and profit calculator for the GTA Online Cayo Perico Heist.",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "0"
+                    },
+                    "author": {
+                        "@type": "Person",
+                        "name": "Antigravity"
+                    }
+                })
+            }}
+        />
+
       <NavBar 
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -380,6 +405,10 @@ export default function Home() {
                 wallSafeValue={wallSafeValue}
                 language={currentLang}
             />
+            <ZoneInstructions 
+                bags={calculatedBags} 
+                language={currentLang} 
+            />
           </div>
         )}
 
@@ -399,6 +428,6 @@ export default function Home() {
             <p>Cayo Perico Heist Calculator &copy; 2026</p>
         </footer>
       </div>
-    </div>
+    </main>
   );
 }

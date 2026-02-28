@@ -74,6 +74,9 @@ export interface Translation {
     manualFinancialBreakdown: string;
     finalManualTake: string;
     payouts: string;
+    zoneStats: string;
+    pTitle: string;
+    playerSummary: string;
   };
   data: {
     primaryTitle: string;
@@ -187,6 +190,9 @@ export const translations: Record<Language, Translation> = {
       manualFinancialBreakdown: "Manual Financial Breakdown",
       finalManualTake: "Final Manual Take",
       payouts: "Player Payouts",
+      zoneStats: "Zone Intel (Routes)",
+      pTitle: "P",
+      playerSummary: "Player Booty Summary",
     },
     data: {
       primaryTitle: "Primary Target Values",
@@ -297,6 +303,9 @@ export const translations: Record<Language, Translation> = {
       manualFinancialBreakdown: "手動分紅結算",
       finalManualTake: "最終手動利潤",
       payouts: "成員分成",
+      zoneStats: "區域拿取統計",
+      pTitle: "玩",
+      playerSummary: "各玩家財物清單",
     },
     data: {
       primaryTitle: "主要目標價值表",
@@ -407,6 +416,9 @@ export const translations: Record<Language, Translation> = {
       manualFinancialBreakdown: "手动分红结算",
       finalManualTake: "最终手动利润",
       payouts: "成员分成",
+      zoneStats: "区域拿取统计",
+      pTitle: "玩",
+      playerSummary: "各玩家财物清单",
     },
     data: {
       primaryTitle: "主要目标价值表",

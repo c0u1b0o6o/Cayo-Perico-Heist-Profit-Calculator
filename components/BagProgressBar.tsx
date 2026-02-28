@@ -8,6 +8,7 @@ interface BagProgressBarProps {
   bag: PlayerBag;
   simpleMode?: boolean;
   language: Language;
+  flashingZone?: string;
 }
 
 const COLOR_MAP: Record<string, string> = {
@@ -18,7 +19,7 @@ const COLOR_MAP: Record<string, string> = {
   Cash: 'bg-green-800',
 };
 
-export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag, simpleMode = false, language }) => {
+export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag, simpleMode = false, language, flashingZone }) => {
   const t = translations[language];
   // Sort items for visual consistency
   const sortedItems = [...bag.items].sort((a, b) => {
@@ -48,24 +49,31 @@ export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag
           </div>
         )}
         
-        {sortedItems.map((item, idx) => (
-          <div 
-            key={idx}
-            className={clsx(COLOR_MAP[item.type] || 'bg-stone-500', "h-full relative group transition-all duration-500 cursor-help")}
-            style={{ width: `${item.percentage}%` }}
-          >
-             {/* Tooltip */}
-             <div className="absolute opacity-0 group-hover:opacity-100 bottom-full mb-1 left-1/2 -translate-x-1/2 bg-black/90 text-white text-xs p-1 rounded whitespace-nowrap z-20 pointer-events-none">
+        {sortedItems.map((item, idx) => {
+          const isCurrentZone = item.zone === flashingZone;
+          return (
+            <div 
+              key={idx}
+              className={clsx(
+                  COLOR_MAP[item.type] || 'bg-stone-500', 
+                  "h-full relative group cursor-help transition-all duration-500",
+                  !isCurrentZone && flashingZone && "opacity-40 brightness-75 grayscale-50 scale-y-90 origin-center"
+              )}
+              style={{ width: `${item.percentage}%` }}
+            >
+              {/* Tooltip */}
+              <div className="absolute opacity-0 group-hover:opacity-100 bottom-full mb-1 left-1/2 -translate-x-1/2 bg-black/90 text-white text-xs p-1 rounded whitespace-nowrap z-20 pointer-events-none">
                 {t.loot[item.type as keyof typeof t.loot] || item.type}: {Math.round(item.percentage)}% (${item.value.toLocaleString()})
               </div>
-             {/* Label if wide enough */}
-             {item.percentage > 20 && !simpleMode && (
+              {/* Label if wide enough */}
+              {item.percentage > 20 && !simpleMode && (
                 <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-black/70 overflow-hidden">
                    {t.loot[item.type as keyof typeof t.loot] || item.type}
                 </span>
-             )}
-          </div>
-        ))}
+              )}
+            </div>
+          );
+        })}
       </div>
       
       {simpleMode && (
@@ -84,8 +92,11 @@ export const BagProgressBar: React.FC<BagProgressBarProps> = ({ playerIndex, bag
                         });
                         
                         return Object.entries(groups).map(([type, totalWeight], i, arr) => {
+                            const isNew = bag.items.some(it => it.type === type && it.zone === flashingZone);
                             return (
-                                <span key={type}>
+                                <span key={type} className={clsx(
+                                    !isNew && flashingZone && "opacity-40 grayscale-50"
+                                )}>
                                     {t.loot[type as keyof typeof t.loot] || type} {Math.round(totalWeight)}%
                                     {i < arr.length - 1 ? ', ' : ''}
                                 </span>

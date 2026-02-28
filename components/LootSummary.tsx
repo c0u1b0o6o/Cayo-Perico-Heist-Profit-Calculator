@@ -93,14 +93,6 @@ export const LootSummary: React.FC<LootSummaryProps> = ({ lootCounts, language }
         ) : (
           <p className="text-gray-400 italic font-hand text-lg text-center py-4">{t.summary.empty}</p>
         )}
-        
-        <div className="flex items-center justify-center gap-2 mt-6">
-            <div className="h-px bg-gray-300 flex-1"></div>
-            <p className="text-[10px] text-gray-400 font-sans font-bold uppercase tracking-widest whitespace-nowrap">
-              {t.summary.footer}
-            </p>
-            <div className="h-px bg-gray-300 flex-1"></div>
-        </div>
       </div>
     </div>
   );
