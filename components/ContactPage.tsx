@@ -38,7 +38,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ language }) => {
     const links = useMemo(() => {
         const urls = [
             'https://github.com/c0u1b0o6o',
-            'https://discord.com/cuboo',
+            'https://discord.com',
             'https://placeholder.com',
             'mailto:cuboomax@gmail.com'
         ];
