@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PlayerBag, LOOT_SPECS } from '@/lib/types';
-import { BagProgressBar } from './BagProgressBar';
+import { BagProgressBar } from '@/components/BagProgressBar';
 import { translations, Language } from '@/lib/translations';
 import { clsx } from 'clsx';
 import { Map, ChevronLeft, ChevronRight, Image as ImageIcon } from 'lucide-react';

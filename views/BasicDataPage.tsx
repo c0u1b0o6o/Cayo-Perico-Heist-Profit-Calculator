@@ -7,7 +7,7 @@ interface BasicDataProps {
   language: Language;
 }
 
-export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
+export const BasicDataPage: React.FC<BasicDataProps> = ({ language }) => {
   const t = translations[language];
 
   const secondaryLoot = [

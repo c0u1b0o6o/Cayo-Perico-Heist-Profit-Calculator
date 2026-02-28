@@ -4,13 +4,13 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { LootCounts, PlayerSettings, Zone, LootType } from '@/lib/types';
 import { calculateOptimalLoot } from '@/lib/algorithm';
 import { LootInput } from '@/components/LootInput';
-import { LootSummary } from '@/components/LootSummary';
-import { ResultBoard } from '@/components/ResultBoard';
-import { ZoneInstructions } from '@/components/ZoneInstructions';
+import { LootSummary } from '@/sections/LootSummary';
+import { ResultBoard } from '@/sections/ResultBoard';
+import { ZoneInstructions } from '@/sections/ZoneInstructions';
 import { NavBar } from '@/components/NavBar';
-import { BasicData } from '@/components/BasicData';
-import { ContactPage } from '@/components/ContactPage';
-import { FAQPage } from '@/components/FAQPage';
+import { BasicDataPage } from '@/views/BasicDataPage';
+import { ContactPage } from '@/views/ContactPage';
+import { FAQPage } from '@/views/FAQPage';
 import { translations, Language } from '@/lib/translations';
 import { Check, Dices } from 'lucide-react';
 import { clsx } from 'clsx';
@@ -448,7 +448,7 @@ export default function Home() {
         {/* Data Tab */}
         {activeTab === 'data' && (
           <div className="flex justify-center">
-            <BasicData language={currentLang} />
+            <BasicDataPage language={currentLang} />
           </div>
         )}
 
