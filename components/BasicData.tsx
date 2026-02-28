@@ -38,19 +38,19 @@ export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
   return (
     <div className="w-full max-w-4xl space-y-12 pb-12 pt-8">
       {/* Primary Target Table */}
-      <div className="bg-white p-8 rounded shadow-2xl transform rotate-1 relative paper-texture transition-transform hover:rotate-0 duration-300">
-        <div className="absolute -top-3 left-1/4 transform -translate-x-1/2 w-48 h-8 bg-red-200 opacity-50 -rotate-2 tape"></div>
-        <h2 className="font-hand text-3xl mb-6 border-b-2 border-red-100 pb-2 font-bold text-red-600">
+      <div className="bg-white p-6 sm:p-8 rounded shadow-2xl transform rotate-1 relative paper-texture transition-transform hover:rotate-0 duration-300">
+        <div className="absolute -top-2 left-1/4 transform -translate-x-1/2 w-32 h-6 bg-red-200 opacity-50 -rotate-2 tape"></div>
+        <h2 className="font-hand text-heading-2 mb-6 border-b-2 border-red-100 pb-2 font-bold text-red-600">
           {t.data.primaryTitle}
         </h2>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left font-hand text-xl border-collapse">
+          <table className="w-full text-left font-hand text-body-normal border-collapse">
             <thead>
-              <tr className="border-b-2 border-gray-200 text-gray-500 uppercase text-sm tracking-widest font-hand font-bold">
-                <th className="py-3 px-4">{t.data.lootName}</th>
-                <th className="py-3 px-4 text-right">{t.data.primaryNormal}</th>
-                <th className="py-3 px-4 text-right">{t.data.primaryHard}</th>
+              <tr className="border-b-2 border-gray-200 text-gray-500 uppercase tracking-widest font-hand font-bold">
+                <th className="py-2 px-2 sm:py-3 sm:px-4 text-xs sm:text-sm">{t.data.lootName}</th>
+                <th className="py-2 px-2 sm:py-3 sm:px-4 text-right text-xs sm:text-sm">{t.data.primaryNormal}</th>
+                <th className="py-2 px-2 sm:py-3 sm:px-4 text-right text-xs sm:text-sm">{t.data.primaryHard}</th>
               </tr>
             </thead>
             <tbody>
@@ -69,20 +69,20 @@ export const BasicData: React.FC<BasicDataProps> = ({ language }) => {
       </div>
 
       {/* Secondary Loot Table */}
-      <div className="bg-white p-8 rounded shadow-2xl transform -rotate-1 relative paper-texture transition-transform hover:rotate-0 duration-300">
-        <div className="absolute -top-3 left-3/4 transform -translate-x-1/2 w-48 h-8 bg-blue-200 opacity-50 rotate-1 tape"></div>
-        <h2 className="font-hand text-3xl mb-6 border-b-2 border-blue-100 pb-2 font-bold text-gray-800">
+      <div className="bg-white p-6 sm:p-8 rounded shadow-2xl transform -rotate-1 relative paper-texture transition-transform hover:rotate-0 duration-300">
+        <div className="absolute -top-2 left-3/4 transform -translate-x-1/2 w-32 h-6 bg-blue-200 opacity-50 rotate-1 tape"></div>
+        <h2 className="font-hand text-heading-2 mb-6 border-b-2 border-blue-100 pb-2 font-bold text-gray-800">
           {t.data.lootTable}
         </h2>
         
         <div className="overflow-x-auto">
-          <table className="w-full text-left font-hand text-xl border-collapse">
+          <table className="w-full text-left font-hand text-body-normal border-collapse">
             <thead>
-              <tr className="border-b-2 border-gray-200 text-gray-500 uppercase text-sm tracking-widest font-hand font-bold">
-                <th className="py-3 px-4">{t.data.lootName}</th>
-                <th className="py-3 px-4 text-right">{t.data.valuePerPile}</th>
-                <th className="py-3 px-4 text-right">{t.data.weightPerPile}</th>
-                <th className="py-3 px-4 text-right">{t.data.valuePerFullBag}</th>
+              <tr className="border-b-2 border-gray-200 text-gray-500 uppercase tracking-widest font-hand font-bold">
+                <th className="py-2 px-2 sm:py-3 sm:px-4 text-xs sm:text-sm">{t.data.lootName}</th>
+                <th className="py-2 px-2 sm:py-3 sm:px-4 text-right text-xs sm:text-sm">{t.data.valuePerPile}</th>
+                <th className="py-2 px-2 sm:py-3 sm:px-4 text-right text-xs sm:text-sm">{t.data.weightPerPile}</th>
+                <th className="py-2 px-2 sm:py-3 sm:px-4 text-right text-xs sm:text-sm">{t.data.valuePerFullBag}</th>
               </tr>
             </thead>
             <tbody>

@@ -23,6 +23,41 @@ body {
   font-family: var(--font-roboto), sans-serif;
 }
 
+/* 
+ * Global Typography Scaling System 2.0
+ * Balanced for Desktop prominence and Mobile usability
+ */
+
+.text-heading-1 {
+  @apply text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight;
+}
+
+.text-heading-2 {
+  @apply text-2xl md:text-3xl lg:text-5xl font-bold;
+}
+
+.text-heading-3 {
+  @apply text-xl md:text-2xl lg:text-3xl font-bold;
+}
+
+.text-body-large {
+  @apply text-base md:text-xl lg:text-2xl;
+}
+
+.text-body-normal {
+  @apply text-sm md:text-lg lg:text-xl;
+}
+
+/* Utilities */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+
 /* Planning Board Background */
 .bg-grid {
     background-color: #2b2b2b;

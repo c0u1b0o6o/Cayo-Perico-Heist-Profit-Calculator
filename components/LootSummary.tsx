@@ -35,7 +35,7 @@ export const LootSummary: React.FC<LootSummaryProps> = ({ lootCounts, language }
 
   return (
     <div className="bg-stone-100 text-gray-800 p-6 rounded shadow-lg transform -rotate-1 relative paper-texture transition-transform hover:scale-[1.02] mt-8">
-      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-yellow-200 opacity-50 -rotate-2 tape shadow-sm"></div>
+      <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-indigo-200 opacity-50 rotate-1 tape"></div>
       
       <button 
         onClick={() => setIsCollapsed(!isCollapsed)}

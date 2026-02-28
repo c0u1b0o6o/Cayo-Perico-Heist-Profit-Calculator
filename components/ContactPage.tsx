@@ -55,7 +55,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ language }) => {
             {/* Main Dossier Section */}
             <div className="relative bg-[#e6d5b8] rounded-r-xl shadow-2xl p-1 border-l-20 border-[#cbb085]">
                 {/* Dossier Content */}
-                <div className="bg-white/90 paper-texture p-8 md:p-12 min-h-[500px] shadow-inner relative overflow-hidden">
+                <div className="bg-white/90 paper-texture p-4 sm:p-8 md:p-12 min-h-[500px] shadow-inner relative overflow-hidden">
                     
                     {/* Decorative Stamp */}
                     <div className="absolute top-10 right-[-40px] border-4 border-red-600/30 text-red-600/30 font-black text-4xl px-8 py-2 rotate-12 select-none pointer-events-none uppercase tracking-widest hidden md:block">
@@ -78,7 +78,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ language }) => {
                                 <div className="mt-4 font-hand text-center text-gray-800 text-lg font-bold">
                                     <WordZoom text="SHAW!" />
                                 </div>
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-yellow-200/50 rotate-1 tape"></div>
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-yellow-200/50 rotate-1 tape"></div>
                             </div>
 
                             {/* Personnel Details */}
@@ -98,7 +98,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ language }) => {
                         {/* Right Column: Information */}
                         <div className="md:col-span-2 space-y-10">
                             <div>
-                                <h1 className="font-hand text-5xl font-black text-gray-900 mb-2 border-b-4 border-gray-900 pb-2 inline-block">
+                                <h1 className="font-hand text-heading-1 text-gray-900 mb-2 border-b-4 border-gray-900 pb-2 inline-block">
                                     <WordZoom text={t.contact.title} />
                                 </h1>
                                 <div className="font-hand text-2xl text-gray-600 mt-6 leading-relaxed">
@@ -117,8 +117,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ language }) => {
 
             {/* Separated Links Section (Intel Sheet) */}
             <div className="relative bg-[#e6d5b8] rounded-r-lg shadow-xl p-1 border-l-12 border-[#cbb085] -rotate-1">
-                <div className="bg-white/90 paper-texture p-6 md:p-8 shadow-inner relative overflow-hidden">
-                    <h2 className="font-hand text-3xl font-black text-gray-800 mb-6 border-b-2 border-gray-200 pb-2 flex items-center gap-3">
+                <div className="bg-white/90 paper-texture p-4 sm:p-6 md:p-8 shadow-inner relative overflow-hidden">
+                    <h2 className="font-hand text-heading-2 text-gray-800 mb-6 border-b-2 border-gray-200 pb-2 flex items-center gap-3">
                         <WordZoom text={t.contact.intelTitle} />
                     </h2>
 

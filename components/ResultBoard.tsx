@@ -166,9 +166,9 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
         </div>
 
         {/* Tape */}
-        <div className="absolute -top-4 w-64 h-12 bg-gray-300 opacity-40 rotate-1 left-1/2 transform -translate-x-1/2 tape"></div>
+        <div className="absolute -top-3 w-48 h-10 bg-gray-300 opacity-40 rotate-1 left-1/2 transform -translate-x-1/2 tape"></div>
 
-        <h2 className="font-hand text-4xl text-center mb-6 text-green-800 font-bold">{t.results.title}</h2>
+        <h2 className="font-hand text-heading-2 text-center mb-6 text-green-800 font-bold">{t.results.title}</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-900">
             {/* Breakdown */}
@@ -212,7 +212,7 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
             <div className="md:col-span-1 bg-green-50 p-4 rounded border border-green-200 font-hand flex flex-col justify-center">
                 <div className="text-center mb-6">
                     <div className="text-sm text-gray-600 font-sans mb-1 uppercase tracking-widest">Potential Take</div>
-                    <span className="text-4xl font-bold text-green-900 drop-shadow-sm tabular-nums">
+                    <span className="text-heading-1 text-green-900 drop-shadow-sm tabular-nums">
                         ${Math.round(totalWithElite).toLocaleString()}
                     </span>
                 </div>
@@ -233,9 +233,7 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
             </div>
 
             {/* Bag Recommendation */}
-            <div className="md:col-span-1 p-4 bg-yellow-50 border-2 border-yellow-200 rounded dashed-border relative">
-                 <h3 className="font-hand text-xl font-bold mb-3 text-yellow-800"> {t.results.recommendation}</h3>
-                 <div className="space-y-3 font-hand pr-2">
+            <div className="space-y-3 font-hand pr-2">
                     {bags.map((bag, i) => (
                         <div key={i} className="bg-white p-2 rounded border border-gray-100 shadow-sm">
                             <div className="text-sm font-bold text-gray-500 mb-1">{language === 'en' ? `Player ${i + 1}` : `玩家 ${i + 1}`}</div>
@@ -244,7 +242,6 @@ export const ResultBoard: React.FC<ResultBoardProps> = ({ bags, settings, basePr
                     ))}
                     {bags.length === 0 && <p className="text-gray-400 italic">{t.results.emptyBags}</p>}
                  </div>
-            </div>
         </div>
     </div>
   );

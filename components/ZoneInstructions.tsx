@@ -100,7 +100,7 @@ export const ZoneInstructions: React.FC<ZoneInstructionsProps> = ({ bags, langua
           </button>
         )}
 
-        {/* Side-by-Side View */}
+      {/* Side-by-Side View */}
         {currentZone && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch transition-all duration-500">
             {/* Left Side: Image Placeholder */}
@@ -110,6 +110,7 @@ export const ZoneInstructions: React.FC<ZoneInstructionsProps> = ({ bags, langua
                 <p className="font-hand text-xl text-gray-500 italic uppercase">Intel Photo Incoming...</p>
                 <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-gray-400 opacity-20"></div>
                 <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-gray-400 opacity-20"></div>
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-20 h-6 bg-white/20 rotate-1 tape"></div>
             </div>
 
             {/* Right Side: Sticky Note */}
