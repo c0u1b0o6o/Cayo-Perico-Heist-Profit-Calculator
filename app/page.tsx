@@ -18,12 +18,13 @@ import { clsx } from 'clsx';
 const ZONES: Zone[] = ['MainDockL', 'MainDockS', 'NorthStorage', 'SouthStorage', 'WestStorage', 'Basement', 'Office'];
 
 const PRIMARY_TARGETS: { nameKey: keyof typeof translations.en.loot; value: number; id: string }[] = [
-  { nameKey: 'Sinsimito Tequila', value: 900000, id: 'tequila' },
-  { nameKey: 'Ruby Necklace', value: 1000000, id: 'necklace' },
-  { nameKey: 'Bearer Bonds', value: 1100000, id: 'bonds' },
-  { nameKey: 'Pink Diamond', value: 1300000, id: 'diamond' },
+  // Sorted from highest to lowest value
   { nameKey: 'Panther Statue', value: 1900000, id: 'panther' },
+  { nameKey: 'Pink Diamond', value: 1300000, id: 'diamond' },
+  { nameKey: 'Bearer Bonds', value: 1100000, id: 'bonds' },
   { nameKey: 'Madrazo Files', value: 1100000, id: 'files' },
+  { nameKey: 'Ruby Necklace', value: 1000000, id: 'necklace' },
+  { nameKey: 'Sinsimito Tequila', value: 900000, id: 'tequila' },
 ];
 
 const STORAGE_KEY = 'cayo_perico_calculator_v2_state';

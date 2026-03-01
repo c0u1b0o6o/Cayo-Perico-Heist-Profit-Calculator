@@ -19,12 +19,13 @@ export const BasicDataPage: React.FC<BasicDataProps> = ({ language }) => {
   ];
 
   const primaryTargets = [
-    { name: 'Sinsimito Tequila', normal: 900000, hard: 990000 },
-    { name: 'Ruby Necklace', normal: 1000000, hard: 1100000 },
-    { name: 'Bearer Bonds', normal: 1100000, hard: 1210000 },
-    { name: 'Pink Diamond', normal: 1300000, hard: 1430000 },
+    // Sorted highest value first
     { name: 'Panther Statue', normal: 1900000, hard: 2090000 },
+    { name: 'Pink Diamond', normal: 1300000, hard: 1430000 },
+    { name: 'Bearer Bonds', normal: 1100000, hard: 1210000 },
     { name: 'Madrazo Files', normal: 1100000, hard: 1100000 },
+    { name: 'Ruby Necklace', normal: 1000000, hard: 1100000 },
+    { name: 'Sinsimito Tequila', normal: 900000, hard: 990000 },
   ];
 
   const COLOR_MAP: Record<string, string> = {
