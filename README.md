@@ -7,7 +7,7 @@
 
 這是一個專為《俠盜獵車手 5》（GTA 5）佩里克島搶劫（Cayo Perico Heist）設計的高級收益計算器。透過智慧演算法，幫助玩家在有限的背包空間中實現**收益最大化**。
 
-[**🚀 立即使用 (Live Demo)**](https://cayo-perico.cuboouo.com)
+[**🚀 立即使用 (Live Demo)**] https://cayo-perico.cuboouo.com
 
 ---
 
@@ -87,3 +87,9 @@ npm run dev
 ## 📜 授權
 
 [MIT License](LICENSE)
+
+---
+
+## 悄悄話
+
+以上都是AI寫的README，我不想管那麼多了:D
